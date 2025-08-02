@@ -50,16 +50,6 @@ public class Machine : MonoBehaviour
 
     public GameManager GameManager { get; private set; }
 
-    public ConveyorItem ApplyToItem(ConveyorItem item)
-    {
-        if (machineModi.IsValidIndex(currentModus))
-        {
-            return machineModi[currentModus].ApplyItem(item);
-        }
-
-        return null;
-    }
-
     public bool ModuleTick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
         if (machineModi.IsValidIndex(currentModus))

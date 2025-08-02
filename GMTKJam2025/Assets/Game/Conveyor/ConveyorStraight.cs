@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class ConveyorStraight : Conveyor
 {
-    protected override void MoveIn(Transform item, Sequence moveSequence, TweenCallback reachedCallback)
+    protected override void MoveIn(Transform item, Sequence moveSequence)
     {
-        moveSequence.Append(item.DOMove(CenterPosition, GameManager.ConveyorMoveDuration / 2).SetEase(Ease.OutQuad).OnComplete(reachedCallback));
+        moveSequence.Append(item.DOMove(CenterPosition, GameManager.ConveyorMoveDuration / 2).SetEase(Ease.OutQuad));
     }
 
     protected override void MoveToOut(Transform item, Sequence moveSequence)

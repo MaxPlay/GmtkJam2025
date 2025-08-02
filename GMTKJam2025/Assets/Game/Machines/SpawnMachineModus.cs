@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class SpawnMachineModus : MachineModus
 {
-    [SerializeField, UnityEngine.Range(0,10)] private int ticksBetweenSpawn;
+    [SerializeField, UnityEngine.Range(0, 10)] private int ticksBetweenSpawn;
     [SerializeField] private List<ConveyorItemData> spawnableItems;
 
 
     private int ticksBetweenSpawnCounter;
-
-    public override ConveyorItem ApplyItem(ConveyorItem item)
-    {
-        return null;
-    }
 
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
@@ -27,8 +22,7 @@ public class SpawnMachineModus : MachineModus
                 return false;
             }
 
-            newItem = Instantiate(spawnableItems[Random.Range(0, spawnableItems.Count)].Prefab.gameObject)
-                .GetComponent<ConveyorItem>();
+            newItem = Instantiate(spawnableItems[Random.Range(0, spawnableItems.Count)].Prefab);
             return true;
         }
 

@@ -47,15 +47,29 @@ public abstract class Conveyor : MonoBehaviour
     {
         if (installedMachine)
         {
-            if (!installedMachine.ModuleTick(currentItem, out ConveyorItem newItem))
+            if (installedMachine.ModuleTick(currentItem, out ConveyorItem newItem))
+            {
+                if (newItem)
+                {
+                    if (currentItem && newItem.Data != currentItem.Data)
+                    {
+                        currentItem.transform.DOKill();
+                        Destroy(currentItem.gameObject);
+                    }
+
+                    newItem.transform.position = CenterPosition;
+                    currentItem = newItem;
+                    currentItem.SetConveyor(this);
+                }
+                else if (currentItem)
+                {
+                    currentItem.transform.DOKill();
+                    Destroy(currentItem.gameObject);
+                }
+            }
+            else
             {
                 //Machine Broke
-            }
-            else if(newItem)
-            {
-                newItem.transform.position = CenterPosition;
-                currentItem = newItem;
-                currentItem.SetConveyor(this);
             }
         }
 
@@ -131,27 +145,12 @@ public abstract class Conveyor : MonoBehaviour
             Sequence moveSequence = DOTween.Sequence();
             other.MoveToOut(currentItem.transform, moveSequence);
             currentItem.SetConveyor(this);
-            MoveIn(currentItem.transform, moveSequence, NewConveyorReached);
-        }
-    }
-
-    private void NewConveyorReached()
-    {
-        if (installedMachine)
-        {
-            //TODO(bz): Machine can break here
-            ConveyorItem newItem = installedMachine.ApplyToItem(currentItem);
-            if (newItem != currentItem)
-            {
-                Destroy(currentItem.gameObject);
-                currentItem = newItem;
-            }
-            //Replace current Item with new Item.
+            MoveIn(currentItem.transform, moveSequence);
         }
     }
 
     protected abstract void MoveToOut(Transform item, Sequence moveSequence);
-    protected abstract void MoveIn(Transform item, Sequence moveSequence, TweenCallback reachedCallback);
+    protected abstract void MoveIn(Transform item, Sequence moveSequence);
 }
 
 public enum ConveyorDirection
