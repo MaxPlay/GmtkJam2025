@@ -48,7 +48,7 @@ public class CombineMachineModus : StorageMachineModus
                     return true;
                 }
             }
-            newItem = Instantiate(fallback.Prefab);
+            newItem = currentItem.Data == fallback ? currentItem : Instantiate(fallback.Prefab);
             Transform storedItemTransform = storedItem.transform;
             storedItem = null;
             storedItemTransform.SetParent(null);
