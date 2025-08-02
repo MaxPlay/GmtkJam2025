@@ -17,21 +17,38 @@ public class Carrying : MonoBehaviour
 
     public bool TryCarry()
     {
-        //TODO(bz): Get this from a cached List
-        var type = FindObjectsOfType<Carryable>();
-        foreach (Carryable item in type)
+        Collider[] hitCarryables = Physics.OverlapSphere(transform.position, pickUpRange, 1 << 7);
+        if (hitCarryables.Length == 0)
+            return false;
+        Carryable closestCarryable = null;
+        float closestDistance = -1;
+        foreach (Collider collider in hitCarryables)
         {
-            if (!(Vector3.Distance(item.transform.position, this.transform.position) < pickUpRange)) 
+            if(!collider.TryGetComponent(out Carryable newCarryable))
                 continue;
-
-            currentlyCarriedObject = item;
-            item.transform.SetParent(transform);
-            item.transform.position = transform.position;
-            currentlyCarriedObject.GetPickedUp();
-            return true;
+            if (closestDistance < 0)
+            {
+                closestCarryable = newCarryable;
+                closestDistance = Vector3.SqrMagnitude(closestCarryable.transform.position - transform.position);
+                continue;
+            }
+            float distance = Vector3.SqrMagnitude(closestCarryable.transform.position - transform.position);
+            if (distance < closestDistance)
+            {
+                closestCarryable = newCarryable;
+                closestDistance = distance;
+            }
         }
 
-        return false;
+        if (!closestCarryable)
+            return false;
+
+        currentlyCarriedObject = closestCarryable;
+        closestCarryable.transform.SetParent(transform);
+        closestCarryable.transform.position = transform.position;
+        currentlyCarriedObject.GetPickedUp();
+
+        return true;
     }
 
     public bool TryDropItem()
