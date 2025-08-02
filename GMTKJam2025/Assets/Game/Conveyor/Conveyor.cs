@@ -15,9 +15,10 @@ public abstract class Conveyor : MonoBehaviour
     [SerializeField]
     private Conveyor next;
 
-    [ReadOnly]
     [SerializeField]
     private Machine installedMachine;
+
+    [SerializeField] private bool allowMachineInstallation = true;
 
     [SerializeField]
     private ConveyorItem currentItem;
@@ -32,6 +33,8 @@ public abstract class Conveyor : MonoBehaviour
 
     public Vector3 CenterPosition => transform.TransformPoint(centerPosition);
     public Vector3 OutPosition => transform.TransformPoint(outPosition);
+
+    public bool AllowMachineInstallation => allowMachineInstallation;
 
     public void Initialize(GameManager gameManager)
     {
@@ -76,6 +79,12 @@ public abstract class Conveyor : MonoBehaviour
         Gizmos.DrawCube(thisTransform.TransformPoint(outPosition), Vector3.one * 0.2f);
     }
 
+    public void InstallMachine(Machine machine)
+    {
+        if (AllowMachineInstallation)
+            installedMachine = machine;
+    }
+
     public Vector2Int GetDeliveryCoordinate()
     {
         Transform thisTransform = transform;
@@ -106,12 +115,21 @@ public abstract class Conveyor : MonoBehaviour
             Sequence moveSequence = DOTween.Sequence();
             other.MoveToOut(currentItem.transform, moveSequence);
             currentItem.SetConveyor(this);
-            MoveIn(currentItem.transform, moveSequence);
+            MoveIn(currentItem.transform, moveSequence, NewConveyorReached);
+        }
+    }
+
+    private void NewConveyorReached()
+    {
+        if (installedMachine)
+        {
+            ConveyorItem newItem = installedMachine.ApplyToItem(currentItem);
+            //Replace current Item with new Item.
         }
     }
 
     protected abstract void MoveToOut(Transform item, Sequence moveSequence);
-    protected abstract void MoveIn(Transform item, Sequence moveSequence);
+    protected abstract void MoveIn(Transform item, Sequence moveSequence, TweenCallback reachedCallback);
 }
 
 public enum ConveyorDirection

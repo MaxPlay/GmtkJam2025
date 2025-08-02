@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
                 conveyor.SetNext(other);
             }
         }
+
+        foreach (Machine machine in machines)
+        {
+            machine.Initialize(this);
+        }
     }
 
     private void Update()

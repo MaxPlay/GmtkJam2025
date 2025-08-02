@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1856714821595253725}
   - component: {fileID: 3344973717798929528}
   - component: {fileID: 688853476523684018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: conveyorbelt_straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3948395031351663492}
   - component: {fileID: 4791160615185497620}
-  m_Layer: 0
+  - component: {fileID: 6763431255838187454}
+  m_Layer: 8
   m_Name: Conveyor_Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +136,29 @@ MonoBehaviour:
   direction: 0
   next: {fileID: 0}
   installedMachine: {fileID: 0}
+  allowMachineInstallation: 1
   currentItem: {fileID: 0}
   incomingItem: {fileID: 0}
   centerPosition: {x: 0, y: 0.8, z: 0}
   outPosition: {x: 0, y: 0.8, z: 1}
+--- !u!65 &6763431255838187454
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380535505582376499}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0.5, z: 0}

@@ -1,9 +1,10 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class ConveyorCurved : Conveyor
 {
-    protected override void MoveIn(Transform item, Sequence moveSequence)
+    protected override void MoveIn(Transform item, Sequence moveSequence, TweenCallback reachedCallback)
     {
         throw new System.NotImplementedException();
     }

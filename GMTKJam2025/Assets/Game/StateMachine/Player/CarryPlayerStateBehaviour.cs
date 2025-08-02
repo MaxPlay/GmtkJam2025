@@ -13,7 +13,7 @@ public class CarryPlayerStateBehaviour : StateBehaviour<PlayerStates>
 
     public override PlayerStates UpdateState(float deltaTime)
     {
-        if (objectDropped && carryingBehaviour.TryDropItem())
+        if (objectDropped)
         {
             return leavingState;
         }
@@ -47,7 +47,7 @@ public class CarryPlayerStateBehaviour : StateBehaviour<PlayerStates>
 
     private void TryDropItem(InputAction.CallbackContext obj)
     {
-        objectDropped = true;
+        objectDropped = carryingBehaviour.TryDropItem();
     }
 
     public override void InitializeState()

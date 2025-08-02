@@ -24,7 +24,7 @@ public class Carrying : MonoBehaviour
         float closestDistance = -1;
         foreach (Collider collider in hitCarryables)
         {
-            if(!collider.TryGetComponent(out Carryable newCarryable))
+            if(!collider.TryGetComponent(out Carryable newCarryable) || newCarryable.Blocked)
                 continue;
             if (closestDistance < 0)
             {
@@ -53,8 +53,35 @@ public class Carrying : MonoBehaviour
 
     public bool TryDropItem()
     {
-        currentlyCarriedObject.GetDroppedOff();
-        currentlyCarriedObject.transform.SetParent(null);
+        Collider[] hitCarryables = Physics.OverlapSphere(transform.position, pickUpRange, 1 << 8);
+        if (hitCarryables.Length == 0)
+            return false;
+        Conveyor closestConveyor = null;
+        float closestDistance = -1;
+        foreach (Collider collider in hitCarryables)
+        {
+            if (!collider.TryGetComponent(out Conveyor newConveyor) || !newConveyor.AllowMachineInstallation)
+                continue;
+            if (closestDistance < 0)
+            {
+                closestConveyor = newConveyor;
+                closestDistance = Vector3.SqrMagnitude(closestConveyor.transform.position - transform.position);
+                continue;
+            }
+            float distance = Vector3.SqrMagnitude(closestConveyor.transform.position - transform.position);
+            if (distance < closestDistance)
+            {
+                closestConveyor = newConveyor;
+                closestDistance = distance;
+            }
+        }
+
+        if (!closestConveyor)
+            return false;
+
+        currentlyCarriedObject.GetDroppedOff(closestConveyor);
+        currentlyCarriedObject.transform.position = closestConveyor.CenterPosition;
+        currentlyCarriedObject.transform.SetParent(closestConveyor.transform);
         currentlyCarriedObject = null;
 
         return true;
