@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6487e07ef42358340ba132f68ac6bdfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ticksBetweenSpawn: 7
+  ticksBetweenSpawn: 1
   spawnableItems:
   - {fileID: 11400000, guid: 8efcd1e07369e274f94629a061fd9575, type: 2}
   - {fileID: 11400000, guid: 9ad10527f8515f1459e4843620b713c3, type: 2}

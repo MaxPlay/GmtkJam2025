@@ -49,22 +49,15 @@ public abstract class Conveyor : MonoBehaviour
         {
             if (installedMachine.ModuleTick(currentItem, out ConveyorItem newItem))
             {
+                if (currentItem && (!newItem || newItem.Data != currentItem.Data))
+                {
+                    Destroy(currentItem.gameObject);
+                }
                 if (newItem)
                 {
-                    if (currentItem && newItem.Data != currentItem.Data)
-                    {
-                        currentItem.transform.DOKill();
-                        Destroy(currentItem.gameObject);
-                    }
-
                     newItem.transform.position = CenterPosition;
                     currentItem = newItem;
                     currentItem.SetConveyor(this);
-                }
-                else if (currentItem)
-                {
-                    currentItem.transform.DOKill();
-                    Destroy(currentItem.gameObject);
                 }
             }
             else
@@ -142,7 +135,7 @@ public abstract class Conveyor : MonoBehaviour
             incomingItem = null;
 
             Conveyor other = currentItem.Conveyor;
-            Sequence moveSequence = DOTween.Sequence();
+            Sequence moveSequence = DOTween.Sequence(currentItem.transform);
             other.MoveToOut(currentItem.transform, moveSequence);
             currentItem.SetConveyor(this);
             MoveIn(currentItem.transform, moveSequence);
