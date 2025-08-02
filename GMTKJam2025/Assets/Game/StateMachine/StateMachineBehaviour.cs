@@ -1,16 +1,57 @@
+using System;
+using System.Collections.Generic;
+using NaughtyAttributes;
+using NUnit.Framework;
 using UnityEngine;
 
-public class StateMachineBehaviour : MonoBehaviour
+public class StateMachineBehaviour<T> : MonoBehaviour where T : Enum
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] protected bool updateAfterStateChange;
+    [SerializeField] protected T initialState;
+
+    [SerializeField] protected List<StateEntry> states;
+
+    protected StateMachine<T> stateMachine;
+
+    protected void Start()
     {
-        
+        stateMachine = new StateMachine<T>(updateAfterStateChange);
+        foreach (StateEntry state in states)
+        {
+            stateMachine.AddState(state.State, state.Behaviour.UpdateState, state.Behaviour.EnterState, state.Behaviour.ExitState, state.Behaviour.InitializeState);
+        }
+        stateMachine.Initialize(initialState);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-        
+        stateMachine.Update(Time.deltaTime);
+    }
+
+    [Button("Collect Attached States")]
+    protected void CollectAssignedStates()
+    {
+        states.Clear();
+        foreach (StateBehaviour<T> component in GetComponents<StateBehaviour<T>>())
+        {
+            states.Add(new StateEntry(initialState, component));
+        }
+    }
+
+    [System.Serializable]
+    public class StateEntry
+    {
+        [SerializeField] private T state;
+        [SerializeField] private StateBehaviour<T> behaviour;
+
+        public StateEntry(T state, StateBehaviour<T> behaviour)
+        {
+            this.state = state;
+            this.behaviour = behaviour;
+        }
+
+        public T State => state;
+
+        public StateBehaviour<T> Behaviour => behaviour;
     }
 }
