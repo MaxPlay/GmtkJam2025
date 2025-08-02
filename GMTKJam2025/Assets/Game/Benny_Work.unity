@@ -372,7 +372,23 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7639818147352923825, guid: c7ad20a04ac712d4bbdcb317abb4a266, type: 3}
+      propertyPath: states.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639818147352923825, guid: c7ad20a04ac712d4bbdcb317abb4a266, type: 3}
+      propertyPath: states.Array.data[1].state
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639818147352923825, guid: c7ad20a04ac712d4bbdcb317abb4a266, type: 3}
+      propertyPath: states.Array.data[2].state
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639818147352923825, guid: c7ad20a04ac712d4bbdcb317abb4a266, type: 3}
       propertyPath: states.Array.data[1].behaviour
+      value: 
+      objectReference: {fileID: 453661948}
+    - target: {fileID: 7639818147352923825, guid: c7ad20a04ac712d4bbdcb317abb4a266, type: 3}
+      propertyPath: states.Array.data[2].behaviour
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -627,6 +643,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c2fa22021da4d24c8fdd9fe6ba18433, type: 3}
+--- !u!114 &453661948 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2826093182787277084, guid: c7ad20a04ac712d4bbdcb317abb4a266, type: 3}
+  m_PrefabInstance: {fileID: 196727758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dfa824ccfd19384d9db96b92c952df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &539626614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1132,7 @@ GameObject:
   - component: {fileID: 1110883004}
   - component: {fileID: 1110883003}
   - component: {fileID: 1110883002}
+  - component: {fileID: 1110883007}
   m_Layer: 7
   m_Name: CollectorMachine
   m_TagString: Untagged
@@ -1127,7 +1155,19 @@ MonoBehaviour:
   blocked: 0
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1110883007}
+        m_TargetAssemblyTypeName: StorageMachineModus, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1110883003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,7 +1199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cade904aaac796f469e9e28568c3c7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMachineModus: {fileID: 0}
+  mainMachineModus: {fileID: 1110883007}
   secondaryMachineModus: {fileID: 0}
   currentModus: {fileID: 0}
 --- !u!65 &1110883005
@@ -1192,12 +1232,57 @@ Transform:
   m_GameObject: {fileID: 1110883001}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 0.9, z: 3.86}
+  m_LocalPosition: {x: -3.82, y: 0.9, z: -0.01}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1925510714}
+  - {fileID: 1267060384}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1110883007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110883001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9bce0b7a4a33e4d9abe3ebdb90ec52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {fileID: 1267060384}
+--- !u!1 &1267060383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1267060384}
+  m_Layer: 7
+  m_Name: StorageVisualTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1267060384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267060383}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.337, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1110883006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1292205464
 PrefabInstance:
