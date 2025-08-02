@@ -6,12 +6,16 @@ using UnityEngine;
 
 public class StateMachineBehaviour<T> : MonoBehaviour where T : Enum
 {
+#if UNITY_EDITOR
+    [ReadOnly] public T currentState;
+#endif
+
     [SerializeField] protected bool updateAfterStateChange;
     [SerializeField] protected T initialState;
-
     [SerializeField] protected List<StateEntry> states;
 
     protected StateMachine<T> stateMachine;
+
 
     protected void Start()
     {
@@ -26,6 +30,9 @@ public class StateMachineBehaviour<T> : MonoBehaviour where T : Enum
     protected void Update()
     {
         stateMachine.Update(Time.deltaTime);
+#if UNITY_EDITOR
+        currentState = stateMachine.CurrentState;
+#endif
     }
 
     [Button("Collect Attached States")]
@@ -34,7 +41,7 @@ public class StateMachineBehaviour<T> : MonoBehaviour where T : Enum
         states.Clear();
         foreach (StateBehaviour<T> component in GetComponents<StateBehaviour<T>>())
         {
-            states.Add(new StateEntry(initialState, component));
+            states.Add(new StateEntry(component.DefaultState, component));
         }
     }
 

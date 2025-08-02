@@ -77,6 +77,9 @@ public class StateMachine<T> where T : Enum
         public Func<float, T> UpdateFunction;
         public Action EnterFunction;
         public Action ExitFunction;
+        /// <summary>
+        /// Invoked if this State is the inítial State for a Machine
+        /// </summary>
         public Action InitFunction;
     }
 }
