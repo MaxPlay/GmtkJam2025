@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConveyorCurved : Conveyor
 {
-    protected override void MoveIn(Transform item, Sequence moveSequence, TweenCallback reachedCallback)
+    protected override void MoveIn(Transform item, Sequence moveSequence)
     {
         throw new System.NotImplementedException();
     }
