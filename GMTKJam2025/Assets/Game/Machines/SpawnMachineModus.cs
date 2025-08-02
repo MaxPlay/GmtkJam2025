@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 
+[AddComponentMenu("Machine Modules/Spawn Machine Module")]
 public class SpawnMachineModus : MachineModus
 {
     [SerializeField, UnityEngine.Range(0, 10)] private int ticksBetweenSpawn;
