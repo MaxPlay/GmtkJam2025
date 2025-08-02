@@ -65,6 +65,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ea6cfcc0921886543a6fb22aeefcb4ed, type: 2}
+  - {fileID: 2100000, guid: 010774f15f23e3846836c3655372bf37, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,3 +135,7 @@ MonoBehaviour:
   direction: 0
   next: {fileID: 0}
   installedMachine: {fileID: 0}
+  currentItem: {fileID: 0}
+  incomingItem: {fileID: 0}
+  centerPosition: {x: 0, y: 0.8, z: 0}
+  outPosition: {x: 0, y: 0.8, z: 1}

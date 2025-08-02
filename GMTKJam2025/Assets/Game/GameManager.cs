@@ -14,9 +14,14 @@ public class GameManager : MonoBehaviour
     private List<Machine> machines = new();
 
     [SerializeField]
+    private float conveyorMoveDuration = 0.3f;
+    public float ConveyorMoveDuration => conveyorMoveDuration;
+
+    [SerializeField]
     [Min(0.1f)]
-    private float tickDuration;
+    private float tickDuration = 1;
     private float lastTick;
+
 
     public static Vector2Int CoordinateFromWorld(Vector3 position)
         => new Vector2Int(Mathf.RoundToInt(position.x) - (position.x < 0.0f ? 1 : 0), Mathf.RoundToInt(position.z) - (position.z < 0.0f ? 1 : 0)) / 2;
@@ -27,6 +32,7 @@ public class GameManager : MonoBehaviour
 
         foreach (Conveyor conveyor in FindObjectsByType<Conveyor>(FindObjectsInactive.Include, FindObjectsSortMode.None))
         {
+            conveyor.Initialize(this);
             conveyors.Add(conveyor);
             Vector2Int coordinate = CoordinateFromWorld(conveyor.transform.position);
             Debug.Assert(!conveyorAtCoordinate.ContainsKey(coordinate), $"Multiple Conveyors at coordinate {coordinate}.");
@@ -53,6 +59,10 @@ public class GameManager : MonoBehaviour
             foreach (Conveyor conveyor in conveyors)
             {
                 conveyor.Tick();
+            }
+            foreach (Conveyor conveyor in conveyors)
+            {
+                conveyor.Receive();
             }
             foreach (Machine machine in machines)
             {
