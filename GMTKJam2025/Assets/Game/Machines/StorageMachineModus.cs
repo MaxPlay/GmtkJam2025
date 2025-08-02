@@ -4,10 +4,10 @@ using UnityEngine;
 [AddComponentMenu("Machine Modules/Storage Machine Module")]
 public class StorageMachineModus : MachineModus
 {
-    private ConveyorItem storedItem;
+    protected ConveyorItem storedItem;
     private ConveyorItem spawningItem;
     private bool spawningStoredItem = false;
-    [SerializeField] private Transform targetPosition;
+    [SerializeField] protected Transform targetPosition;
 
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
