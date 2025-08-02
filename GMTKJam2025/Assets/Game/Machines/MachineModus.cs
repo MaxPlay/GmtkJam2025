@@ -4,4 +4,10 @@ using UnityEngine;
 public abstract class MachineModus : MonoBehaviour
 {
     public abstract ConveyorItem ApplyItem(ConveyorItem item);
+
+    public virtual ConveyorItem Tick()
+    {
+        return null;
+    }
+
 }

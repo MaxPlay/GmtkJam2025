@@ -75,4 +75,32 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public Conveyor GetClosestConveyor(Vector3 transformPosition)
+    {
+        Conveyor closestConveyor = null;
+        float closestDistance = -1;
+
+        foreach (Conveyor conveyor in conveyors)
+        {
+            if (closestDistance < 0)
+            {
+                closestConveyor = SetClosestConveyor(transformPosition, conveyor, out closestDistance);
+            }
+
+            float distance = Vector3.SqrMagnitude(transformPosition - conveyor.transform.position);
+            if (distance < closestDistance)
+            {
+                closestConveyor = SetClosestConveyor(transformPosition, conveyor, out closestDistance);
+            }
+        }
+
+        return closestConveyor;
+    }
+
+    private static Conveyor SetClosestConveyor(Vector3 transformPosition, Conveyor conveyor, out float closestDistance)
+    {
+        closestDistance = Vector3.SqrMagnitude(transformPosition - conveyor.transform.position);
+        return conveyor;
+    }
 }

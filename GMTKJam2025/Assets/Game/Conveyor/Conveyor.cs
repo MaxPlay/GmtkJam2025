@@ -34,7 +34,7 @@ public abstract class Conveyor : MonoBehaviour
     public Vector3 CenterPosition => transform.TransformPoint(centerPosition);
     public Vector3 OutPosition => transform.TransformPoint(outPosition);
 
-    public bool AllowMachineInstallation => allowMachineInstallation;
+    public bool AllowMachineInstallation => allowMachineInstallation && !installedMachine;
 
     public void Initialize(GameManager gameManager)
     {
@@ -49,6 +49,11 @@ public abstract class Conveyor : MonoBehaviour
         {
             next.PassItem(currentItem);
             currentItem = null;
+        }
+
+        if (installedMachine)
+        {
+            ConveyorItem spawnedItem = installedMachine.ModuleTick();
         }
     }
 
@@ -81,7 +86,7 @@ public abstract class Conveyor : MonoBehaviour
 
     public void InstallMachine(Machine machine)
     {
-        if (AllowMachineInstallation)
+        if (allowMachineInstallation)
             installedMachine = machine;
     }
 

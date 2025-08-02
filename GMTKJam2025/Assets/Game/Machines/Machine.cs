@@ -4,25 +4,31 @@ using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class Machine : MonoBehaviour
 {
     private List<MachineModus> machineModi = new List<MachineModus>();
     [SerializeField] private int currentModus;
-    [SerializeField] private Carryable carryable;
-    [SerializeField] private Conveyor currentConveyorPiece;
+    private Carryable carryable;
+    private Conveyor currentConveyorPiece;
 
 
     public void Initialize(GameManager gameManager)
     {
         GameManager = gameManager;
         GetComponents(machineModi);
+        carryable = GetComponent<Carryable>();
         if (carryable)
         {
             carryable.OnPickUp.AddListener(PickUp);
             carryable.OnDropOff.AddListener(DropOff);
         }
-        if(currentConveyorPiece)
-            currentConveyorPiece.InstallMachine(this);
+
+        currentConveyorPiece = GameManager.GetClosestConveyor(transform.position);
+
+
+        if (currentConveyorPiece)
+            DropOff(currentConveyorPiece);
     }
 
     public void SetBlocked(bool blocked)
@@ -33,11 +39,21 @@ public class Machine : MonoBehaviour
 
     public GameManager GameManager { get; private set; }
 
-    public virtual ConveyorItem ApplyToItem(ConveyorItem item)
+    public ConveyorItem ApplyToItem(ConveyorItem item)
     {
         if (machineModi.IsValidIndex(currentModus))
         {
             return machineModi[currentModus].ApplyItem(item);
+        }
+
+        return null;
+    }
+
+    public ConveyorItem ModuleTick()
+    {
+        if (machineModi.IsValidIndex(currentModus))
+        {
+            return machineModi[currentModus].Tick();
         }
 
         return null;
@@ -56,6 +72,7 @@ public class Machine : MonoBehaviour
     private void DropOff(Conveyor conveyor)
     {
         currentConveyorPiece = conveyor;
+        transform.position = conveyor.CenterPosition;
         currentConveyorPiece.InstallMachine(this);
     }
 }
