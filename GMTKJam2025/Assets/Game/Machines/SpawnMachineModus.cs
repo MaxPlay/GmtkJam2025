@@ -12,21 +12,19 @@ public class SpawnMachineModus : MachineModus
 
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
+        newItem = null;
         ticksBetweenSpawnCounter++;
         if (ticksBetweenSpawnCounter > ticksBetweenSpawn)
         {
             ticksBetweenSpawnCounter = 0;
             if (currentItem != null)
             {
-                newItem = null;
                 return false;
             }
 
-            newItem = Instantiate(spawnableItems[Random.Range(0, spawnableItems.Count)].Prefab);
-            return true;
+            if (spawnableItems.Count > 0)
+                newItem = Instantiate(spawnableItems[Random.Range(0, spawnableItems.Count)].Prefab);
         }
-
-        newItem = null;
         return true;
     }
 }
