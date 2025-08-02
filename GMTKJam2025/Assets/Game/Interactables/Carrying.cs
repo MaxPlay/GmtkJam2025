@@ -26,18 +26,7 @@ public class Carrying : MonoBehaviour
         {
             if(!collider.TryGetComponent(out Carryable newCarryable) || newCarryable.Blocked)
                 continue;
-            if (closestDistance < 0)
-            {
-                closestCarryable = newCarryable;
-                closestDistance = Vector3.SqrMagnitude(closestCarryable.transform.position - transform.position);
-                continue;
-            }
-            float distance = Vector3.SqrMagnitude(closestCarryable.transform.position - transform.position);
-            if (distance < closestDistance)
-            {
-                closestCarryable = newCarryable;
-                closestDistance = distance;
-            }
+            closestDistance = CheckDistanceAndAssign(closestDistance, newCarryable, ref closestCarryable);
         }
 
         if (!closestCarryable)
@@ -62,18 +51,7 @@ public class Carrying : MonoBehaviour
         {
             if (!collider.TryGetComponent(out Conveyor newConveyor) || !newConveyor.AllowMachineInstallation)
                 continue;
-            if (closestDistance < 0)
-            {
-                closestConveyor = newConveyor;
-                closestDistance = Vector3.SqrMagnitude(closestConveyor.transform.position - transform.position);
-                continue;
-            }
-            float distance = Vector3.SqrMagnitude(closestConveyor.transform.position - transform.position);
-            if (distance < closestDistance)
-            {
-                closestConveyor = newConveyor;
-                closestDistance = distance;
-            }
+            closestDistance = CheckDistanceAndAssign(closestDistance, newConveyor, ref closestConveyor);
         }
 
         if (!closestConveyor)
@@ -85,5 +63,23 @@ public class Carrying : MonoBehaviour
         currentlyCarriedObject = null;
 
         return true;
+    }
+
+    private float CheckDistanceAndAssign<T>(float closestDistance, T newConveyor, ref T closestConveyor) where T : Component
+    {
+        if (closestDistance < 0)
+        {
+            closestConveyor = newConveyor;
+            closestDistance = Vector3.SqrMagnitude(closestConveyor.transform.position - transform.position);
+            return closestDistance;
+        }
+        float distance = Vector3.SqrMagnitude(newConveyor.transform.position - transform.position);
+        if (distance < closestDistance)
+        {
+            closestConveyor = newConveyor;
+            closestDistance = distance;
+        }
+
+        return closestDistance;
     }
 }

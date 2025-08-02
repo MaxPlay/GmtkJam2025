@@ -124,6 +124,11 @@ public abstract class Conveyor : MonoBehaviour
         if (installedMachine)
         {
             ConveyorItem newItem = installedMachine.ApplyToItem(currentItem);
+            if (newItem != currentItem)
+            {
+                Destroy(currentItem.gameObject);
+                currentItem = newItem;
+            }
             //Replace current Item with new Item.
         }
     }

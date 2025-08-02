@@ -6,21 +6,16 @@ using UnityEngine;
 
 public class Machine : MonoBehaviour
 {
-    [SerializeField] private List<MachineModus> machineModi;
+    private List<MachineModus> machineModi = new List<MachineModus>();
     [SerializeField] private int currentModus;
     [SerializeField] private Carryable carryable;
     [SerializeField] private Conveyor currentConveyorPiece;
-
-    [Button("Assign Machine Modi")]
-    private void AssignMachineModi()
-    {
-        machineModi = GetComponents<MachineModus>().ToList();
-    }
 
 
     public void Initialize(GameManager gameManager)
     {
         GameManager = gameManager;
+        GetComponents(machineModi);
         if (carryable)
         {
             carryable.OnPickUp.AddListener(PickUp);
