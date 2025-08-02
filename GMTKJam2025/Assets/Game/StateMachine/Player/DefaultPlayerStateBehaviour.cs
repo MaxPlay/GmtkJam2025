@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class DefaultPlayerStateBehaviour : StateBehaviour<PlayerStates>
 {
-    [SerializeField] private PlayerStates interactState = PlayerStates.Interact;
     [SerializeField] private PlayerStates carryState = PlayerStates.Carry;
 
     [SerializeField] InputActionReference interactActionA;

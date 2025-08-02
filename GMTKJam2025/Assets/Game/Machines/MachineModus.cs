@@ -3,10 +3,6 @@ using UnityEngine;
 
 public abstract class MachineModus : MonoBehaviour
 {
-    public virtual bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
-    {
-        newItem = null;
-        return true;
-    }
+    public abstract bool Tick(ConveyorItem currentItem, out ConveyorItem newItem);
 
 }
