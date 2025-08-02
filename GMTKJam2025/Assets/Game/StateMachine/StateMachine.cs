@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class StateMachine<T> where T : Enum
 {
-    private readonly Dictionary<T, State> states = new ();
+    private readonly Dictionary<T, State> states = new();
     private T currentState;
     private bool updateAfterStateChange;
-    
+
     public StateMachine(bool updateAfterStateChange)
     {
         this.updateAfterStateChange = updateAfterStateChange;
@@ -38,12 +38,19 @@ public class StateMachine<T> where T : Enum
         {
             states[CurrentState].ExitFunction?.Invoke();
             CurrentState = newState;
-            if(states.ContainsKey(CurrentState))
+            if (states.ContainsKey(CurrentState))
                 states[CurrentState].EnterFunction?.Invoke();
 
-            if(updateAfterStateChange && states.ContainsKey(CurrentState)) 
+            if (updateAfterStateChange && states.ContainsKey(CurrentState))
                 states[CurrentState].UpdateFunction.Invoke(deltaTime);
         }
+    }
+
+    public void Destroy()
+    {
+        if (!states.ContainsKey(CurrentState))
+            return;
+        states[CurrentState].ExitFunction?.Invoke();
     }
 
     private void TestCurrentState()
