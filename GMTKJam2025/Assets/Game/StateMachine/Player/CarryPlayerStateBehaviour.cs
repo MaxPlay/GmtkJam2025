@@ -6,14 +6,19 @@ public class CarryPlayerStateBehaviour : StateBehaviour<PlayerStates>
     [SerializeField] private PlayerStates leavingState = PlayerStates.Default;
     [SerializeField] InputActionReference moveAction;
     [SerializeField] InputActionReference pickupAction;
+    [SerializeField] private Carrying carryingBehaviour;
+    [SerializeField] private InputMovementBehaviour movementBehaviour;
 
     private bool objectDropped;
 
     public override PlayerStates UpdateState(float deltaTime)
     {
-        if (objectDropped)
+        if (objectDropped && carryingBehaviour.TryDropItem())
+        {
             return leavingState;
+        }
 
+        movementBehaviour.UpdateMovement(deltaTime);
         return defaultState;
     }
 

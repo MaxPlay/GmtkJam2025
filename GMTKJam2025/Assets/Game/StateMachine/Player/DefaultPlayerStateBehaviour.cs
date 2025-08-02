@@ -6,9 +6,12 @@ public class DefaultPlayerStateBehaviour : StateBehaviour<PlayerStates>
     [SerializeField] private PlayerStates interactState = PlayerStates.Interact;
     [SerializeField] private PlayerStates carryState = PlayerStates.Carry;
 
-    [SerializeField] InputActionReference moveAction;
     [SerializeField] InputActionReference interactAction;
     [SerializeField] InputActionReference pickupAction;
+
+    [SerializeField] private Interacting interactionsBehaviour;
+    [SerializeField] private Carrying carryingBehaviour;
+    [SerializeField] private InputMovementBehaviour movementBehaviour;
 
     private bool objectInteractingWith;
     private bool objectPickedUp;
@@ -23,7 +26,8 @@ public class DefaultPlayerStateBehaviour : StateBehaviour<PlayerStates>
         {
             return carryState;
         }
-        transform.Translate(new Vector3(moveAction.action.ReadValue<Vector2>().x, 0, moveAction.action.ReadValue<Vector2>().y) * Time.deltaTime);
+
+        movementBehaviour.UpdateMovement(deltaTime);
 
         return defaultState;
     }
@@ -62,11 +66,17 @@ public class DefaultPlayerStateBehaviour : StateBehaviour<PlayerStates>
 
     private void TryInteract(InputAction.CallbackContext obj)
     {
-        objectInteractingWith = true;
+        if (interactionsBehaviour.TryInteract())
+        {
+            objectInteractingWith = true;
+        }
     }
 
     private void TryPickUp(InputAction.CallbackContext obj)
     {
-        objectPickedUp = true;
+        if (carryingBehaviour.TryCarry())
+        {
+            objectPickedUp = true;
+        }
     }
 }

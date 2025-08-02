@@ -5,6 +5,7 @@ public class InteractPlayerStateBehaviour : StateBehaviour<PlayerStates>
 {
     [SerializeField] private PlayerStates leavingState = PlayerStates.Default;
     [SerializeField] InputActionReference interactAction;
+    [SerializeField] private Interacting interactionsBehaviour;
 
     public override PlayerStates UpdateState(float deltaTime)
     {
