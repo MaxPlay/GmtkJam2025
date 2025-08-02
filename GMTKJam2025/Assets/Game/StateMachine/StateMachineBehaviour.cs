@@ -35,6 +35,11 @@ public class StateMachineBehaviour<T> : MonoBehaviour where T : Enum
 #endif
     }
 
+    private void OnDestroy()
+    {
+        stateMachine.Destroy();
+    }
+
     [Button("Collect Attached States")]
     protected void CollectAssignedStates()
     {
