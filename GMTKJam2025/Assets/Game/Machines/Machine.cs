@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
@@ -7,8 +8,12 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Machine : MonoBehaviour
 {
-    private List<MachineModus> machineModi = new List<MachineModus>();
-    [SerializeField] private int currentModus;
+    [SerializeField]
+    private MachineModus mainMachineModus;
+    [SerializeField]
+    private MachineModus secondaryMachineModus;
+    private MachineModus inactiveMachineModus;
+    [ReadOnly, SerializeField] private MachineModus currentModus;
     private Carryable carryable;
     private Interactable interactable;
     private Conveyor currentConveyorPiece;
@@ -17,7 +22,11 @@ public class Machine : MonoBehaviour
     public void Initialize(GameManager gameManager)
     {
         GameManager = gameManager;
-        GetComponents(machineModi);
+        currentModus = mainMachineModus;
+        if (!secondaryMachineModus)
+            secondaryMachineModus = mainMachineModus;
+
+        inactiveMachineModus = gameObject.AddComponent<InactiveMachineModus>();
         carryable = GetComponent<Carryable>();
         if (carryable)
         {
@@ -27,7 +36,7 @@ public class Machine : MonoBehaviour
         interactable = GetComponent<Interactable>();
         if (interactable)
         {
-            interactable.OnInteract.AddListener(Interacted);
+            interactable.OnInteract.AddListener(Interact);
         }
 
         currentConveyorPiece = GameManager.GetClosestConveyor(transform.position);
@@ -37,9 +46,14 @@ public class Machine : MonoBehaviour
             DropOff(currentConveyorPiece);
     }
 
-    private void Interacted(int interactionIndex)
+    public void Interact(int interactionIndex)
     {
-
+        currentModus = interactionIndex switch
+        {
+            0 => mainMachineModus,
+            1 => secondaryMachineModus,
+            2 => inactiveMachineModus
+        };
     }
 
     public void SetBlocked(bool blocked)
@@ -52,9 +66,9 @@ public class Machine : MonoBehaviour
 
     public bool ModuleTick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
-        if (machineModi.IsValidIndex(currentModus))
+        if (currentModus)
         {
-            return machineModi[currentModus].Tick(currentItem, out newItem);
+            return currentModus.Tick(currentItem, out newItem);
         }
 
         newItem = null;

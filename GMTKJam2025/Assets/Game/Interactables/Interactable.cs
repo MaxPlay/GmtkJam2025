@@ -12,9 +12,9 @@ public class Interactable : MonoBehaviour
     [SerializeField] private UnityEvent<int> onInteract;
     public UnityEvent<int> OnInteract => onInteract;
 
-    public void Interact()
+    public void Interact(int interactionIndex)
     {
-
+        OnInteract.Invoke(interactionIndex);
     }
 
     public void StartInteracting()

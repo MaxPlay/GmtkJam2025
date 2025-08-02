@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5dfc5f2864354d4cb107aaf71a0df69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpRange: 0.78
+  pickUpRange: 1
 --- !u!114 &8694565955853376244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61491c5920f54aa408ea4ba9e6fb04ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRange: 0
+  interactionRange: 1
 --- !u!1 &8502236065774572981
 GameObject:
   m_ObjectHideFlags: 0

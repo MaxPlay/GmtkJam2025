@@ -21,9 +21,9 @@ public class DefaultPlayerStateBehaviour : StateBehaviour<PlayerStates>
 
     private void Awake()
     {
-        InteractionActionAssignments[interactActionA.action] = 1;
-        InteractionActionAssignments[interactActionB.action] = 2;
-        InteractionActionAssignments[interactActionN.action] = 3;
+        InteractionActionAssignments[interactActionA.action] = 0;
+        InteractionActionAssignments[interactActionB.action] = 1;
+        InteractionActionAssignments[interactActionN.action] = 2;
     }
 
     public override PlayerStates UpdateState(float deltaTime)

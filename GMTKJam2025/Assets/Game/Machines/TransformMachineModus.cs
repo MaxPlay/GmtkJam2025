@@ -48,9 +48,13 @@ public class TransformMachineModus : MachineModus
 
                 newItem = Instantiate(to.Prefab);
             }
-            else
+            else if(currentItem.Data != fallback)
             {
                 newItem = Instantiate(fallback.Prefab);
+            }
+            else
+            {
+                newItem = currentItem;
             }
             return true;
         }
