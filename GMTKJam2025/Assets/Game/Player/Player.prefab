@@ -153,7 +153,6 @@ GameObject:
   - component: {fileID: 765126210234366397}
   - component: {fileID: 7639818147352923825}
   - component: {fileID: 6726921652835944541}
-  - component: {fileID: 7477715696495205569}
   - component: {fileID: 2826093182787277084}
   - component: {fileID: 1213341088321188357}
   - component: {fileID: 1185929707033837260}
@@ -200,7 +199,7 @@ MonoBehaviour:
   - state: 0
     behaviour: {fileID: 6726921652835944541}
   - state: 1
-    behaviour: {fileID: 7477715696495205569}
+    behaviour: {fileID: 0}
   - state: 2
     behaviour: {fileID: 2826093182787277084}
 --- !u!114 &6726921652835944541
@@ -216,7 +215,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultState: 0
-  interactState: 1
   carryState: 2
   interactActionA: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   interactActionB: {fileID: 8803827447109311987, guid: 052faaac586de48259a63d0c4782560b, type: 3}
@@ -225,22 +223,6 @@ MonoBehaviour:
   interactionsBehaviour: {fileID: 8694565955853376244}
   carryingBehaviour: {fileID: 102380730954662591}
   movementBehaviour: {fileID: 1185929707033837260}
---- !u!114 &7477715696495205569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5315477539002421568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fffbdae0a078cb44bba4112864c8068, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultState: 1
-  leavingState: 0
-  interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  interactionsBehaviour: {fileID: 8694565955853376244}
 --- !u!114 &2826093182787277084
 MonoBehaviour:
   m_ObjectHideFlags: 0
