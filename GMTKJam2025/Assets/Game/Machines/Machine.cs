@@ -75,6 +75,7 @@ public class Machine : MonoBehaviour
     {
         currentConveyorPiece = conveyor;
         transform.position = conveyor.CenterPosition;
+        transform.LookAt(conveyor.OutPosition);
         currentConveyorPiece.InstallMachine(this);
     }
 }
