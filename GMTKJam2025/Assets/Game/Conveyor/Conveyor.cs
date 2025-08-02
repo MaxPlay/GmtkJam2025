@@ -45,16 +45,27 @@ public abstract class Conveyor : MonoBehaviour
 
     public void Tick()
     {
+        if (installedMachine)
+        {
+            if (!installedMachine.ModuleTick(currentItem, out ConveyorItem newItem))
+            {
+                //Machine Broke
+            }
+            else if(newItem)
+            {
+                newItem.transform.position = CenterPosition;
+                currentItem = newItem;
+                currentItem.SetConveyor(this);
+            }
+        }
+
         if (next)
         {
             next.PassItem(currentItem);
             currentItem = null;
         }
 
-        if (installedMachine)
-        {
-            ConveyorItem spawnedItem = installedMachine.ModuleTick();
-        }
+
     }
 
     private void PassItem(ConveyorItem item)
@@ -128,6 +139,7 @@ public abstract class Conveyor : MonoBehaviour
     {
         if (installedMachine)
         {
+            //TODO(bz): Machine can break here
             ConveyorItem newItem = installedMachine.ApplyToItem(currentItem);
             if (newItem != currentItem)
             {

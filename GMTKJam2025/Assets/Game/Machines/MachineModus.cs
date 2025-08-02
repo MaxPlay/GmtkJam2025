@@ -5,9 +5,10 @@ public abstract class MachineModus : MonoBehaviour
 {
     public abstract ConveyorItem ApplyItem(ConveyorItem item);
 
-    public virtual ConveyorItem Tick()
+    public virtual bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
-        return null;
+        newItem = null;
+        return true;
     }
 
 }

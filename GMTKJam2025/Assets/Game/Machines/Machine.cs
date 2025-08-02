@@ -49,14 +49,15 @@ public class Machine : MonoBehaviour
         return null;
     }
 
-    public ConveyorItem ModuleTick()
+    public bool ModuleTick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
         if (machineModi.IsValidIndex(currentModus))
         {
-            return machineModi[currentModus].Tick();
+            return machineModi[currentModus].Tick(currentItem, out newItem);
         }
 
-        return null;
+        newItem = null;
+        return true;
     }
 
     public void Tick()
