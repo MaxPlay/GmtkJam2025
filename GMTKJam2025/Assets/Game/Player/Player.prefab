@@ -218,7 +218,9 @@ MonoBehaviour:
   defaultState: 0
   interactState: 1
   carryState: 2
-  interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactActionA: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactActionB: {fileID: 8803827447109311987, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactActionN: {fileID: -8346617979144621363, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   pickupAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   interactionsBehaviour: {fileID: 8694565955853376244}
   carryingBehaviour: {fileID: 102380730954662591}

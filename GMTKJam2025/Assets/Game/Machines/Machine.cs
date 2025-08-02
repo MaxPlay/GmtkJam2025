@@ -10,6 +10,7 @@ public class Machine : MonoBehaviour
     private List<MachineModus> machineModi = new List<MachineModus>();
     [SerializeField] private int currentModus;
     private Carryable carryable;
+    private Interactable interactable;
     private Conveyor currentConveyorPiece;
 
 
@@ -23,12 +24,22 @@ public class Machine : MonoBehaviour
             carryable.OnPickUp.AddListener(PickUp);
             carryable.OnDropOff.AddListener(DropOff);
         }
+        interactable = GetComponent<Interactable>();
+        if (interactable)
+        {
+            interactable.OnInteract.AddListener(Interacted);
+        }
 
         currentConveyorPiece = GameManager.GetClosestConveyor(transform.position);
 
 
         if (currentConveyorPiece)
             DropOff(currentConveyorPiece);
+    }
+
+    private void Interacted(int interactionIndex)
+    {
+
     }
 
     public void SetBlocked(bool blocked)

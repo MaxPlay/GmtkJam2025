@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
@@ -6,6 +7,10 @@ public class Interactable : MonoBehaviour
     private bool blocked;
 
     public bool Blocked => blocked;
+
+
+    [SerializeField] private UnityEvent<int> onInteract;
+    public UnityEvent<int> OnInteract => onInteract;
 
     public void Interact()
     {

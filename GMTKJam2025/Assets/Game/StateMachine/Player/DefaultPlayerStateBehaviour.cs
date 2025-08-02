@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,22 +7,27 @@ public class DefaultPlayerStateBehaviour : StateBehaviour<PlayerStates>
     [SerializeField] private PlayerStates interactState = PlayerStates.Interact;
     [SerializeField] private PlayerStates carryState = PlayerStates.Carry;
 
-    [SerializeField] InputActionReference interactAction;
+    [SerializeField] InputActionReference interactActionA;
+    [SerializeField] InputActionReference interactActionB;
+    [SerializeField] InputActionReference interactActionN;
     [SerializeField] InputActionReference pickupAction;
 
     [SerializeField] private Interacting interactionsBehaviour;
     [SerializeField] private Carrying carryingBehaviour;
     [SerializeField] private InputMovementBehaviour movementBehaviour;
 
-    private bool objectInteractingWith;
     private bool objectPickedUp;
+    private Dictionary<InputAction, int> InteractionActionAssignments = new ();
+
+    private void Awake()
+    {
+        InteractionActionAssignments[interactActionA.action] = 1;
+        InteractionActionAssignments[interactActionB.action] = 2;
+        InteractionActionAssignments[interactActionN.action] = 3;
+    }
 
     public override PlayerStates UpdateState(float deltaTime)
     {
-        if (objectInteractingWith)
-        {
-            return interactState;
-        }
         if (objectPickedUp)
         {
             return carryState;
@@ -41,19 +47,22 @@ public class DefaultPlayerStateBehaviour : StateBehaviour<PlayerStates>
     {
         if (unregister)
         {
-            interactAction.action.started -= TryInteract;
+            interactActionA.action.started -= TryInteract;
+            interactActionB.action.started -= TryInteract;
+            interactActionN.action.started -= TryInteract;
             pickupAction.action.started -= TryPickUp;
         }
         else
         {
-            interactAction.action.started += TryInteract;
+            interactActionA.action.started += TryInteract;
+            interactActionB.action.started += TryInteract;
+            interactActionN.action.started += TryInteract;
             pickupAction.action.started += TryPickUp;
         }
     }
 
     public override void ExitState()
     {
-        objectInteractingWith = false;
         objectPickedUp = false;
 
         RegisterEvents(true);
@@ -66,10 +75,7 @@ public class DefaultPlayerStateBehaviour : StateBehaviour<PlayerStates>
 
     private void TryInteract(InputAction.CallbackContext obj)
     {
-        if (interactionsBehaviour.TryInteract())
-        {
-            objectInteractingWith = true;
-        }
+        interactionsBehaviour.TryInteract(InteractionActionAssignments[obj.action]);
     }
 
     private void TryPickUp(InputAction.CallbackContext obj)

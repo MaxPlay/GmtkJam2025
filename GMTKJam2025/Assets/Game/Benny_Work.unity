@@ -214,6 +214,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocked: 0
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &174636661
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Component for Objects that can Interact with Interactables
@@ -12,8 +13,9 @@ public class Interacting : MonoBehaviour
         //Go Through Interactables and Check to Show Tooltips
     }
 
-    public bool TryInteract()
+    public bool TryInteract(int interactionIndex)
     {
+        //Find Interactable and Interact
         return false;
     }
 }
