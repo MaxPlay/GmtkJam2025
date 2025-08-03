@@ -8,6 +8,8 @@ public class SpawnMachineModus : MachineModus
     [SerializeField, UnityEngine.Range(0, 10)] private int ticksBetweenSpawn;
     [SerializeField] private List<ConveyorItemData> spawnableItems;
 
+    private int nextSpawningItem = 0;
+
 
     private int ticksBetweenSpawnCounter;
 
@@ -24,7 +26,10 @@ public class SpawnMachineModus : MachineModus
             }
 
             if (spawnableItems.Count > 0)
-                newItem = Instantiate(spawnableItems[Random.Range(0, spawnableItems.Count)].Prefab);
+            {
+                newItem = Instantiate(spawnableItems[nextSpawningItem].Prefab);
+                nextSpawningItem = (nextSpawningItem + 1) % spawnableItems.Count;
+            }
         }
         return true;
     }
