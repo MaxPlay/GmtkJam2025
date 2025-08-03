@@ -133,8 +133,9 @@ public class Machine : MonoBehaviour
     private void DropOff(Conveyor conveyor)
     {
         currentConveyorPiece = conveyor;
-        transform.position = conveyor.CenterPosition;
-        transform.LookAt(conveyor.OutPosition);
+        transform.position = conveyor.transform.position;
+        
+        transform.rotation = Quaternion.LookRotation(conveyor.OutPosition - conveyor.CenterPosition, Vector3.up);
         currentConveyorPiece.InstallMachine(this);
     }
 }

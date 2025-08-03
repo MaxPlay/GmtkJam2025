@@ -497,6 +497,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b7997275db67d8548b27d01029356b0f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 77c467951e0274b4f99f3c45ed2945d6, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b7997275db67d8548b27d01029356b0f, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7cc77aa1ea4644d8143224a9ddbb50, type: 2}
     - target: {fileID: 919132149155446097, guid: b7997275db67d8548b27d01029356b0f, type: 3}
       propertyPath: m_Name
       value: Arrow
@@ -646,6 +654,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b7997275db67d8548b27d01029356b0f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 77c467951e0274b4f99f3c45ed2945d6, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b7997275db67d8548b27d01029356b0f, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7cc77aa1ea4644d8143224a9ddbb50, type: 2}
     - target: {fileID: 919132149155446097, guid: b7997275db67d8548b27d01029356b0f, type: 3}
       propertyPath: m_Name
       value: Arrow
@@ -740,6 +756,14 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.z
       value: 0.010191055
       objectReference: {fileID: 0}
+    - target: {fileID: 3531881863478146255, guid: 1227b41878a5b7648ab3608c7d3818b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 27235e5ab49967c49905ee13eb2e423d, type: 2}
+    - target: {fileID: 3531881863478146255, guid: 1227b41878a5b7648ab3608c7d3818b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5acd467f4d7aa4246bdea10ba9bf3dcf, type: 2}
     - target: {fileID: 3531881863478146255, guid: 1227b41878a5b7648ab3608c7d3818b0, type: 3}
       propertyPath: 'm_BlendShapeWeights.Array.data[0]'
       value: 0

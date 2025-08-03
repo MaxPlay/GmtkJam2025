@@ -58,7 +58,7 @@ public class Carrying : MonoBehaviour
             return false;
 
         currentlyCarriedObject.GetDroppedOff(closestConveyor);
-        currentlyCarriedObject.transform.position = closestConveyor.CenterPosition;
+        currentlyCarriedObject.transform.position = closestConveyor.transform.position;
         currentlyCarriedObject.transform.SetParent(closestConveyor.transform);
         currentlyCarriedObject = null;
 

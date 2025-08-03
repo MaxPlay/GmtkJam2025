@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<Conveyor> conveyors = new();
     private readonly Dictionary<Vector2Int, Conveyor> conveyorAtCoordinate = new();
+    [SerializeField] private Material conveyorMaterial;
 
     [ReadOnly]
     [SerializeField]
@@ -130,6 +132,8 @@ public class GameManager : MonoBehaviour
                     lastTick -= tickDuration;
                     if (brokenMachines.Count > 0)
                         break;
+                    conveyorMaterial.SetFloat("_TextureOffset", 0f);
+                    conveyorMaterial.DOFloat(1f, "_TextureOffset", conveyorMoveDuration).SetEase(Ease.InOutQuad);
                     foreach (Conveyor conveyor in conveyors)
                     {
                         conveyor.Tick();
