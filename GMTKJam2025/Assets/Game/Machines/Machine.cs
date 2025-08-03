@@ -21,6 +21,7 @@ public class Machine : MonoBehaviour
 
     [SerializeField] private UnityEvent onBreak;
     [SerializeField] private UnityEvent onRepair;
+    [SerializeField] private List<GameObject> blinkingLights;
 
     public void Initialize(GameManager gameManager)
     {
@@ -34,6 +35,9 @@ public class Machine : MonoBehaviour
 
         inactiveMachineModus = gameObject.AddComponent<InactiveMachineModus>();
         inactiveMachineModus.SetMachine(this);
+
+        inactiveMachineModus.ModusEntered.AddListener((() => EnableLights(true)));
+        inactiveMachineModus.ModusExited.AddListener((() => EnableLights(false)));
 
         inactiveMachineModus.ModusExited.Invoke();
         if (secondaryMachineModus != mainMachineModus)
@@ -57,6 +61,14 @@ public class Machine : MonoBehaviour
 
         if (currentConveyorPiece)
             DropOff(currentConveyorPiece);
+    }
+
+    private void EnableLights(bool enable)
+    {
+        foreach (GameObject blinkingLight in blinkingLights)
+        {
+            blinkingLight.SetActive(enable);
+        }
     }
 
     public void Interact(int interactionIndex)

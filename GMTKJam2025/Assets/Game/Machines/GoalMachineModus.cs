@@ -5,6 +5,8 @@ using UnityEngine;
 public class GoalMachineModus : MachineModus
 {
     [SerializeField] protected List<ConveyorItemData> breakingItems;
+    [SerializeField] private Transform displayParent;
+
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
         newItem = null;

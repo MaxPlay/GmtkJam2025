@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -20,9 +21,21 @@ public class TransformMachineModus : MachineModus
     private List<TransformPair> transformations;
     private Dictionary<ConveyorItemData, ConveyorItemData> fromToMapping;
 
+    [SerializeField] private TransformationDisplayList transformationDisplay;
+
     private void Awake()
     {
         Debug.Assert(fallback);
+        if(transformationDisplay)
+            ModusEntered.AddListener(CreateTransformationVisuals);
+    }
+
+    private void CreateTransformationVisuals()
+    {
+        foreach (TransformPair transformation in transformations)
+        {
+            transformationDisplay.AddDisplay(transformation.From, transformation.To);
+        }
     }
 
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)

@@ -761,6 +761,10 @@ MonoBehaviour:
   machines: []
   conveyorMoveDuration: 0.3
   tickDuration: 1
+  conditions: []
+  totalDuration: 60
+  endless: 1
+  state: 0
 --- !u!4 &539626616
 Transform:
   m_ObjectHideFlags: 0

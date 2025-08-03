@@ -7,6 +7,7 @@ using UnityEngine;
 public class CombineMachineModus : StorageMachineModus
 {
     [SerializeField] private ConveyorItemData fallback;
+    [SerializeField] private TransformationDisplayList transformationDisplay;
 
     [Serializable]
     private class CombinePair
@@ -33,6 +34,20 @@ public class CombineMachineModus : StorageMachineModus
     void Awake()
     {
         Debug.Assert(fallback);
+        if (transformationDisplay)
+            ModusEntered.AddListener(CreateTransformationVisuals);
+    }
+
+    private void CreateTransformationVisuals()
+    {
+        foreach (CombinePair transformation in combinationPairs)
+        {
+            transformationDisplay.AddDisplay(new ConveyorItemData[]
+            {
+                transformation.ItemA,
+                transformation.ItemB
+            }, new [] { transformation.Result });
+        }
     }
 
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
