@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Avocado Maki
   prefab: {fileID: 2305841214034865489, guid: 4a616192b7a843f46a2fc851a08fe835, type: 3}
+  sprite: {fileID: 21300000, guid: 686fb0ac214738c45af8bb1954e21318, type: 3}

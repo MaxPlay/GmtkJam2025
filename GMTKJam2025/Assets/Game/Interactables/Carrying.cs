@@ -40,7 +40,7 @@ public class Carrying : MonoBehaviour
         currentlyCarriedObject = closestCarryable;
         closestCarryable.transform.SetParent(carryTarget);
         currentlyCarriedObject.DOKill();
-        closestCarryable.transform.DOLocalMove(Vector3.zero, 0.3f);
+        closestCarryable.transform.DOLocalMove(Vector3.zero, 0.2f);
         currentlyCarriedObject.GetPickedUp();
 
         if (animator)
@@ -67,9 +67,6 @@ public class Carrying : MonoBehaviour
             return false;
 
         currentlyCarriedObject.GetDroppedOff(closestConveyor);
-        currentlyCarriedObject.DOKill();
-        currentlyCarriedObject.transform.SetParent(closestConveyor.transform);
-        currentlyCarriedObject.transform.DOLocalMove(Vector3.zero, 0.3f);
         currentlyCarriedObject = null;
 
         if (animator)

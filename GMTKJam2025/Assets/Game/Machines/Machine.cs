@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,6 +23,8 @@ public class Machine : MonoBehaviour
     [SerializeField] private UnityEvent onBreak;
     [SerializeField] private UnityEvent onRepair;
     [SerializeField] private List<GameObject> blinkingLights;
+
+    private bool initiallyPositioned;
 
     public void Initialize(GameManager gameManager)
     {
@@ -133,9 +136,21 @@ public class Machine : MonoBehaviour
     private void DropOff(Conveyor conveyor)
     {
         currentConveyorPiece = conveyor;
-        transform.position = conveyor.transform.position;
+
+        transform.SetParent(conveyor.transform);
+        transform.DOKill();
+        if (!initiallyPositioned)
+        {
+            initiallyPositioned = true;
+            transform.DOLocalMove(Vector3.zero, 0).SetEase(Ease.OutQuad);
+            transform.DORotateQuaternion(Quaternion.LookRotation(conveyor.OutPosition - conveyor.CenterPosition, Vector3.up), 0).SetEase(Ease.OutQuad);
+        }
+        else
+        {
+            transform.DOLocalMove(Vector3.zero, 0.2f).SetEase(Ease.OutQuad);
+            transform.DORotateQuaternion(Quaternion.LookRotation(conveyor.OutPosition - conveyor.CenterPosition, Vector3.up), 0.2f).SetEase(Ease.OutQuad);
+        }
         
-        transform.rotation = Quaternion.LookRotation(conveyor.OutPosition - conveyor.CenterPosition, Vector3.up);
         currentConveyorPiece.InstallMachine(this);
     }
 }
