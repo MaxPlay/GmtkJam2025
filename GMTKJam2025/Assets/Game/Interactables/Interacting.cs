@@ -7,6 +7,8 @@ using UnityEngine.Events;
 public class Interacting : MonoBehaviour
 {
     [SerializeField] private float interactionRange;
+    [SerializeField]
+    private Animator animator;
 
     private void Update()
     {
@@ -31,6 +33,9 @@ public class Interacting : MonoBehaviour
             return false;
 
         closestInteractable.Interact(interactionIndex);
+
+        if(animator)
+            animator.SetTrigger("Interact");
 
         return true;
     }
