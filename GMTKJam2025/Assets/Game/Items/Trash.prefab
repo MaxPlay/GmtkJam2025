@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5106807845598919872}
   - component: {fileID: 2143582742684187563}
+  - component: {fileID: 8451948560365559688}
   m_Layer: 0
   m_Name: Trash
   m_TagString: Untagged
@@ -46,6 +47,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: ea31ad45a34c96844bbc07bde71db639, type: 2}
+  conveyor: {fileID: 0}
+--- !u!114 &8451948560365559688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272043880291354311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fd2b99a2b2a6c439d2bed2dc61e9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 2
+  expirationAnimationDuration: 0.3
 --- !u!1001 &8667299266987396156
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ConveyorItem : MonoBehaviour
 {
@@ -11,8 +12,25 @@ public class ConveyorItem : MonoBehaviour
     private Conveyor conveyor;
     public Conveyor Conveyor { get => conveyor; private set => conveyor = value; }
 
+    private ExpirationBehaviour expirationBehaviour;
+
+    private void Awake()
+    {
+        expirationBehaviour = GetComponent<ExpirationBehaviour>();
+    }
+
     public void SetConveyor(Conveyor conveyor)
     {
         Conveyor = conveyor;
+    }
+
+    public bool Tick()
+    {
+        if (expirationBehaviour)
+        {
+            return expirationBehaviour.Tick();
+        }
+
+        return true;
     }
 }

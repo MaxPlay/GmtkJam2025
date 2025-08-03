@@ -78,6 +78,11 @@ public abstract class Conveyor : MonoBehaviour
             }
         }
 
+        if (currentItem)
+        {
+            if (!currentItem.Tick())
+                currentItem = null;
+        }
         if (next)
         {
             next.PassItem(currentItem);
