@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -177,6 +178,8 @@ public class GameManager : MonoBehaviour
                 if (Timer <= 0)
                 {
                     State = GameState.Over;
+
+                    SceneManager.LoadScene(Scenes.MENU_SCENE);
                 }
                 break;
         }

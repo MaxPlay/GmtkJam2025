@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
+using TMPro;
 using UnityEngine;
 
 public class GameHud : MonoBehaviour
@@ -10,6 +12,10 @@ public class GameHud : MonoBehaviour
     private PauseScreen pauseScreen;
     [SerializeField]
     private GoalDisplay goalDisplay;
+    [SerializeField]
+    TextMeshProUGUI timer;
+    [SerializeField]
+    TextMeshProUGUI start;
 
     private void Start()
     {
@@ -20,12 +26,20 @@ public class GameHud : MonoBehaviour
 
     private void Update()
     {
+        int totalSeconds = Mathf.FloorToInt(GameManager.Timer);
+        timer.text = $"{totalSeconds / 60:00}:{totalSeconds % 60:00}";
+
         if (state != GameManager.State)
         {
             // Leave state
             switch (state)
             {
                 case GameManager.GameState.Starting:
+                    Sequence s = DOTween.Sequence(start.transform);
+                    s.Append(start.transform.DOScale(Vector2.one, 0.4f));
+                    s.Append(start.transform.DOScale(Vector2.one * 1.2f, 0.2f));
+                    s.Append(start.transform.DOScale(Vector2.zero, 0.4f));
+                    s.Play();
                     break;
                 case GameManager.GameState.Paused:
                     pauseScreen.enabled = false;
