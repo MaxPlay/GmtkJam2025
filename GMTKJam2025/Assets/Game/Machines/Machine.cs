@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 
 [DisallowMultipleComponent]
 public class Machine : MonoBehaviour
@@ -18,6 +19,8 @@ public class Machine : MonoBehaviour
     private Interactable interactable;
     private Conveyor currentConveyorPiece;
 
+    [SerializeField] private UnityEvent onBreak;
+    [SerializeField] private UnityEvent onRepair;
 
     public void Initialize(GameManager gameManager)
     {
@@ -54,6 +57,12 @@ public class Machine : MonoBehaviour
 
     public void Interact(int interactionIndex)
     {
+        if (GameManager.TryFixMachine(this))
+        {
+            onRepair.Invoke();
+            return;
+        }
+
         MachineModus newModus = interactionIndex switch
         {
             0 => mainMachineModus,
@@ -81,7 +90,14 @@ public class Machine : MonoBehaviour
     {
         if (currentModus)
         {
-            return currentModus.Tick(currentItem, out newItem);
+            bool working = currentModus.Tick(currentItem, out newItem);
+            if (!working)
+            {
+                Interact(2);
+                GameManager.MachineBroken(this);
+                onBreak.Invoke();
+            }
+            return working;
         }
 
         newItem = null;

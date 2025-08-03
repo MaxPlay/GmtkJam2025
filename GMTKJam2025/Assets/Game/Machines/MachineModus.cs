@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public abstract class MachineModus : MonoBehaviour
 {
     [SerializeField] protected UnityEvent modusEntered = new();
-
     [SerializeField] protected UnityEvent modusExited = new();
 
     public UnityEvent ModusExited => modusExited;

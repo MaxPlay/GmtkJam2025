@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [ReadOnly]
     [SerializeField]
     private List<Machine> machines = new();
+    private List<Machine> brokenMachines = new();
 
     [SerializeField]
     private float conveyorMoveDuration = 0.3f;
@@ -61,14 +62,18 @@ public class GameManager : MonoBehaviour
         while (lastTick > tickDuration)
         {
             lastTick -= tickDuration;
+            if (brokenMachines.Count > 0)
+                break;
             foreach (Conveyor conveyor in conveyors)
             {
                 conveyor.Tick();
             }
+
             foreach (Conveyor conveyor in conveyors)
             {
                 conveyor.Receive();
             }
+
             foreach (Machine machine in machines)
             {
                 machine.Tick();
@@ -102,5 +107,15 @@ public class GameManager : MonoBehaviour
     {
         closestDistance = Vector3.SqrMagnitude(transformPosition - conveyor.transform.position);
         return conveyor;
+    }
+
+    public void MachineBroken(Machine machine)
+    {
+        brokenMachines.Add(machine);
+    }
+
+    public bool TryFixMachine(Machine machine)
+    {
+        return brokenMachines.Remove(machine);
     }
 }

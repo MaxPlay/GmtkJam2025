@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 public class ConveyorItem : MonoBehaviour
 {
@@ -6,7 +7,9 @@ public class ConveyorItem : MonoBehaviour
     private ConveyorItemData data;
     public ConveyorItemData Data => data;
 
-    public Conveyor Conveyor { get; private set; }
+    [ReadOnly, SerializeField]
+    private Conveyor conveyor;
+    public Conveyor Conveyor { get => conveyor; private set => conveyor = value; }
 
     public void SetConveyor(Conveyor conveyor)
     {

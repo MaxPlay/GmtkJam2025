@@ -27,6 +27,12 @@ public class TransformMachineModus : MachineModus
 
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
+        if (currentItem && currentItem.Data == fallback)
+        {
+            newItem = null;
+            return false;
+        }
+
         if (fromToMapping == null)
         {
             fromToMapping = new();

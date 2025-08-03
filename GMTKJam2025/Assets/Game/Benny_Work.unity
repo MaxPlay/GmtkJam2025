@@ -760,7 +760,7 @@ MonoBehaviour:
   conveyors: []
   machines: []
   conveyorMoveDuration: 0.3
-  tickDuration: 3
+  tickDuration: 1
 --- !u!4 &539626616
 Transform:
   m_ObjectHideFlags: 0
@@ -1906,6 +1906,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1543367013929804973, guid: 610d106f671c5254f89363316e564756, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543367013929804973, guid: 610d106f671c5254f89363316e564756, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543367013929804973, guid: 610d106f671c5254f89363316e564756, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543367013929804973, guid: 610d106f671c5254f89363316e564756, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.7176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543367013929804973, guid: 610d106f671c5254f89363316e564756, type: 3}
+      propertyPath: InitialModule.startColor.minColor.a
+      value: 0.7372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543367013929804973, guid: 610d106f671c5254f89363316e564756, type: 3}
+      propertyPath: InitialModule.startColor.minColor.b
+      value: 0.24528301
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543367013929804973, guid: 610d106f671c5254f89363316e564756, type: 3}
+      propertyPath: InitialModule.startColor.minColor.g
+      value: 0.24528301
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543367013929804973, guid: 610d106f671c5254f89363316e564756, type: 3}
+      propertyPath: InitialModule.startColor.minColor.r
+      value: 0.24528301
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543367013929804973, guid: 610d106f671c5254f89363316e564756, type: 3}
+      propertyPath: InitialModule.startColor.minMaxState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7552535685214513365, guid: 610d106f671c5254f89363316e564756, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.85

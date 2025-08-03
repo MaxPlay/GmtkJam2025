@@ -5,6 +5,7 @@ using UnityEngine;
 [AddComponentMenu("Machine Modules/Spawn Machine Module")]
 public class SpawnMachineModus : MachineModus
 {
+    [SerializeField] protected List<ConveyorItemData> breakingItems;
     [SerializeField, UnityEngine.Range(0, 10)] private int ticksBetweenSpawn;
     [SerializeField] private List<ConveyorItemData> spawnableItems;
 
@@ -15,6 +16,11 @@ public class SpawnMachineModus : MachineModus
 
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
+        if(currentItem &&  breakingItems.Contains(currentItem.Data))
+        {
+            newItem = null;
+            return false;
+        }
         newItem = null;
         ticksBetweenSpawnCounter++;
         if (ticksBetweenSpawnCounter > ticksBetweenSpawn)

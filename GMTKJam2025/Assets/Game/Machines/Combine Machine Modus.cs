@@ -38,6 +38,10 @@ public class CombineMachineModus : StorageMachineModus
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
         newItem = null;
+        if (currentItem && currentItem.Data == fallback)
+        {
+            return false;
+        }
         if (storedItem && currentItem)
         {
             foreach (CombinePair pair in combinationPairs)
