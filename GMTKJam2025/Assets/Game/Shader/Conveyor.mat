@@ -112,7 +112,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _TextureOffset: 1
+    - _TextureOffset: 0.7540559
     - _VerticalOffset: -2.34
     - _VerticalScaling: 1.59
     - _WorkflowMode: 1
