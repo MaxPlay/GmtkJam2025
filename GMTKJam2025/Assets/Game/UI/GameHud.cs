@@ -16,6 +16,8 @@ public class GameHud : MonoBehaviour
     TextMeshProUGUI timer;
     [SerializeField]
     TextMeshProUGUI start;
+    [SerializeField]
+    TextMeshProUGUI finished;
 
     private void Start()
     {

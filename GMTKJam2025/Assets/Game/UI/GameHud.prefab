@@ -499,6 +499,7 @@ MonoBehaviour:
   goalDisplay: {fileID: 1102368256715359123}
   timer: {fileID: 8147518218812184673}
   start: {fileID: 7170956548182396925}
+  finished: {fileID: 0}
 --- !u!1 &3853872964017548247
 GameObject:
   m_ObjectHideFlags: 0
