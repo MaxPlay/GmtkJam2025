@@ -4,14 +4,13 @@ using UnityEngine;
 public class ExpirationBehaviour : MonoBehaviour
 {
     [SerializeField] private int lifeTime;
-    [SerializeField] private float expirationAnimationDuration = 0.3f;
     private int currentLife;
 
-    public bool Tick()
+    public bool Tick(GameManager gameManager)
     {
         currentLife++;
         float progress = (float)(currentLife) / (lifeTime + 1);
-        var scaleTween = transform.DOScale((1 - progress) * Vector3.one, expirationAnimationDuration).SetEase(Ease.Linear);
+        var scaleTween = transform.DOScale((1 - progress) * Vector3.one, gameManager.ConveyorMoveDuration).SetEase(Ease.InOutQuad);
         if (currentLife > lifeTime)
         {
             scaleTween.OnComplete(() => Destroy(gameObject));

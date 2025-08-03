@@ -1,3 +1,4 @@
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class Carrying : MonoBehaviour
 {
     [SerializeField] private float pickUpRange;
     [ReadOnly] private Carryable currentlyCarriedObject;
+    [SerializeField]
+    private Transform carryTarget;
     [SerializeField]
     private Animator animator;
 
@@ -35,8 +38,9 @@ public class Carrying : MonoBehaviour
             return false;
 
         currentlyCarriedObject = closestCarryable;
-        closestCarryable.transform.SetParent(transform);
-        closestCarryable.transform.position = transform.position;
+        closestCarryable.transform.SetParent(carryTarget);
+        currentlyCarriedObject.DOKill();
+        closestCarryable.transform.DOLocalMove(Vector3.zero, 0.3f);
         currentlyCarriedObject.GetPickedUp();
 
         if (animator)
@@ -63,8 +67,9 @@ public class Carrying : MonoBehaviour
             return false;
 
         currentlyCarriedObject.GetDroppedOff(closestConveyor);
-        currentlyCarriedObject.transform.position = closestConveyor.transform.position;
+        currentlyCarriedObject.DOKill();
         currentlyCarriedObject.transform.SetParent(closestConveyor.transform);
+        currentlyCarriedObject.transform.DOLocalMove(Vector3.zero, 0.3f);
         currentlyCarriedObject = null;
 
         if (animator)
