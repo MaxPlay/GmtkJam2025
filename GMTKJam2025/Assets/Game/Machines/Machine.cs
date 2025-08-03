@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using NaughtyAttributes;
+﻿using NaughtyAttributes;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -23,10 +19,15 @@ public class Machine : MonoBehaviour
     {
         GameManager = gameManager;
         currentModus = mainMachineModus;
+        mainMachineModus.SetMachine(this);
         if (!secondaryMachineModus)
+        {
             secondaryMachineModus = mainMachineModus;
+            secondaryMachineModus.SetMachine(this);
+        }
 
         inactiveMachineModus = gameObject.AddComponent<InactiveMachineModus>();
+        inactiveMachineModus.SetMachine(this);
         carryable = GetComponent<Carryable>();
         if (carryable)
         {
@@ -41,7 +42,6 @@ public class Machine : MonoBehaviour
 
         currentConveyorPiece = GameManager.GetClosestConveyor(transform.position);
 
-
         if (currentConveyorPiece)
             DropOff(currentConveyorPiece);
     }
@@ -52,7 +52,7 @@ public class Machine : MonoBehaviour
         {
             0 => mainMachineModus,
             1 => secondaryMachineModus,
-            2 => inactiveMachineModus
+            _ => inactiveMachineModus
         };
     }
 

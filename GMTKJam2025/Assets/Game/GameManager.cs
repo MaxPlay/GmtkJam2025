@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,54 @@ public class GameManager : MonoBehaviour
     private float tickDuration = 1;
     private float lastTick;
 
+    [SerializeField]
+    [Header("Win Conditions")]
+    private List<WinCondition> conditions = new();
+    public IReadOnlyList<WinCondition> WinConditions => conditions;
+    [SerializeField]
+    private float totalDuration;
+    [SerializeField]
+    private bool endless = false;
+
+    [SerializeField]
+    [ReadOnly]
+    private GameState state = GameState.Starting;
+
+    public float Timer { get; private set; }
+    public int Stars { get; private set; }
+
+    public GameState State
+    {
+        get => state;
+        private set
+        {
+            GameState newState = value;
+            if (endless)
+            {
+                newState = newState switch
+                {
+                    GameState.Starting => GameState.Running,
+                    GameState.Over => GameState.Running,
+                    _ => newState
+                };
+            }
+            state = newState;
+            Debug.Log(state);
+        }
+    }
+
+    public bool CollectItemForWinCondition(ConveyorItemData item)
+    {
+        foreach (WinCondition condition in conditions)
+        {
+            if (condition.Item == item)
+            {
+                condition.CurrentCount++;
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static Vector2Int CoordinateFromWorld(Vector3 position)
         => new Vector2Int(Mathf.RoundToInt(position.x) - (position.x < 0.0f ? 1 : 0), Mathf.RoundToInt(position.z) - (position.z < 0.0f ? 1 : 0)) / 2;
@@ -52,27 +101,66 @@ public class GameManager : MonoBehaviour
         {
             machine.Initialize(this);
         }
+
+        Timer = 3;
+        Stars = 0;
+        State = GameState.Starting;
     }
 
     private void Update()
     {
-        lastTick += Time.deltaTime;
-
-        while (lastTick > tickDuration)
+        switch (State)
         {
-            lastTick -= tickDuration;
-            foreach (Conveyor conveyor in conveyors)
+            case GameState.Starting:
+                Timer -= Time.deltaTime;
+                if (Timer <= 0.0f)
+                {
+                    State = GameState.Running;
+                    Timer = totalDuration;
+                }
+                break;
+
+            case GameState.Running:
+                lastTick += Time.deltaTime;
+                Timer -= Time.deltaTime;
+
+                while (lastTick > tickDuration)
+                {
+                    lastTick -= tickDuration;
+                    foreach (Conveyor conveyor in conveyors)
+                    {
+                        conveyor.Tick();
+                    }
+                    foreach (Conveyor conveyor in conveyors)
+                    {
+                        conveyor.Receive();
+                    }
+                    foreach (Machine machine in machines)
+                    {
+                        machine.Tick();
+                    }
+                }
+
+                RefreshStars();
+
+                if (Timer <= 0 || Stars >= 2)
+                {
+                    State = GameState.Over;
+                }
+                break;
+        }
+    }
+
+    private void RefreshStars()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            foreach (WinCondition condition in conditions)
             {
-                conveyor.Tick();
+                if (condition.GetTargetCount(i) > condition.CurrentCount)
+                    return;
             }
-            foreach (Conveyor conveyor in conveyors)
-            {
-                conveyor.Receive();
-            }
-            foreach (Machine machine in machines)
-            {
-                machine.Tick();
-            }
+            Stars = i;
         }
     }
 
@@ -102,5 +190,32 @@ public class GameManager : MonoBehaviour
     {
         closestDistance = Vector3.SqrMagnitude(transformPosition - conveyor.transform.position);
         return conveyor;
+    }
+
+    public enum GameState
+    {
+        Starting,
+        Paused,
+        Running,
+        Over
+    }
+
+    [Serializable]
+    public class WinCondition
+    {
+        public int GetTargetCount(int index) => index switch
+        {
+            0 => TargetCountStar0,
+            1 => TargetCountStar1,
+            2 => TargetCountStar2,
+            _ => int.MaxValue
+        };
+
+        public ConveyorItemData Item;
+        public int TargetCountStar0;
+        public int TargetCountStar1;
+        public int TargetCountStar2;
+        [ReadOnly]
+        public int CurrentCount;
     }
 }
