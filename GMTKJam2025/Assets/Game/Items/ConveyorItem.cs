@@ -28,7 +28,7 @@ public class ConveyorItem : MonoBehaviour
     {
         if (expirationBehaviour)
         {
-            return expirationBehaviour.Tick();
+            return expirationBehaviour.Tick(conveyor.GameManager);
         }
 
         return true;
