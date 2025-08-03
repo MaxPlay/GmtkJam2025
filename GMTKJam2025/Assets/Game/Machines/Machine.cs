@@ -1,4 +1,8 @@
-﻿using NaughtyAttributes;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using NaughtyAttributes;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -21,13 +25,18 @@ public class Machine : MonoBehaviour
         currentModus = mainMachineModus;
         mainMachineModus.SetMachine(this);
         if (!secondaryMachineModus)
-        {
             secondaryMachineModus = mainMachineModus;
+        else
             secondaryMachineModus.SetMachine(this);
-        }
 
         inactiveMachineModus = gameObject.AddComponent<InactiveMachineModus>();
         inactiveMachineModus.SetMachine(this);
+
+        inactiveMachineModus.ModusExited.Invoke();
+        if (secondaryMachineModus != mainMachineModus)
+            secondaryMachineModus.ModusExited.Invoke();
+        mainMachineModus.ModusEntered.Invoke();
+
         carryable = GetComponent<Carryable>();
         if (carryable)
         {
@@ -42,18 +51,26 @@ public class Machine : MonoBehaviour
 
         currentConveyorPiece = GameManager.GetClosestConveyor(transform.position);
 
+
         if (currentConveyorPiece)
             DropOff(currentConveyorPiece);
     }
 
     public void Interact(int interactionIndex)
     {
-        currentModus = interactionIndex switch
+        MachineModus newModus = interactionIndex switch
         {
             0 => mainMachineModus,
             1 => secondaryMachineModus,
             _ => inactiveMachineModus
         };
+
+        if (newModus == currentModus)
+            return;
+
+        currentModus.ModusExited.Invoke();
+        currentModus = newModus;
+        currentModus.ModusEntered.Invoke();
     }
 
     public void SetBlocked(bool blocked)
