@@ -2,9 +2,13 @@ using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private InputAction pauseAction;
+
     [ReadOnly]
     [SerializeField]
     private List<Conveyor> conveyors = new();
@@ -54,8 +58,25 @@ public class GameManager : MonoBehaviour
                     _ => newState
                 };
             }
-            state = newState;
-            Debug.Log(state);
+            if (newState != state)
+            {
+                switch (state)
+                {
+                    case GameState.Paused:
+                        Time.timeScale = 1;
+                        break;
+                }
+
+                state = newState;
+                Debug.Log(state);
+
+                switch (state)
+                {
+                    case GameState.Paused:
+                        Time.timeScale = 0;
+                        break;
+                }
+            }
         }
     }
 
@@ -77,6 +98,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        pauseAction = InputSystem.actions.FindAction("Pause");
+        pauseAction.started += PauseAction_started;
+
         machines.AddRange(FindObjectsByType<Machine>(FindObjectsInactive.Include, FindObjectsSortMode.None));
 
         foreach (Conveyor conveyor in FindObjectsByType<Conveyor>(FindObjectsInactive.Include, FindObjectsSortMode.None))
@@ -105,6 +129,7 @@ public class GameManager : MonoBehaviour
         Timer = 3;
         Stars = 0;
         State = GameState.Starting;
+        Time.timeScale = 1;
     }
 
     private void Update()
@@ -143,12 +168,27 @@ public class GameManager : MonoBehaviour
 
                 RefreshStars();
 
-                if (Timer <= 0 || Stars >= 2)
+                if (Timer <= 0)
                 {
                     State = GameState.Over;
                 }
                 break;
         }
+    }
+
+    private void OnDestroy()
+    {
+        pauseAction.started -= PauseAction_started;
+    }
+
+    private void PauseAction_started(InputAction.CallbackContext obj)
+    {
+        State = state switch
+        {
+            GameState.Paused => GameState.Running,
+            GameState.Running => GameState.Paused,
+            _ => state
+        };
     }
 
     private void RefreshStars()
@@ -190,6 +230,12 @@ public class GameManager : MonoBehaviour
     {
         closestDistance = Vector3.SqrMagnitude(transformPosition - conveyor.transform.position);
         return conveyor;
+    }
+
+    public void Unpause()
+    {
+        if (State == GameState.Paused)
+            State = GameState.Running;
     }
 
     public enum GameState
