@@ -21,8 +21,8 @@ public class StorageMachineModus : MachineModus
             if (currentItem)
             {
                 ConveyorItem newStoredItem = Instantiate(currentItem);
-                newStoredItem.transform.SetParent(transform);
-                newStoredItem.transform.DOLocalMove(targetPosition.localPosition, 0.3f).SetEase(Ease.OutQuad).OnComplete((() =>
+                newStoredItem.transform.SetParent(targetPosition);
+                newStoredItem.transform.DOLocalMove(Vector3.zero, 0.3f).SetEase(Ease.OutQuad).OnComplete((() =>
                 {
                     storedItem = newStoredItem;
                 }));

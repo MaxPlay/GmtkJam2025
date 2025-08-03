@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5106807845598919872}
   - component: {fileID: 2143582742684187563}
+  - component: {fileID: 8451948560365559688}
   m_Layer: 0
   m_Name: Trash
   m_TagString: Untagged
@@ -46,6 +47,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: ea31ad45a34c96844bbc07bde71db639, type: 2}
+  conveyor: {fileID: 0}
+--- !u!114 &8451948560365559688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272043880291354311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fd2b99a2b2a6c439d2bed2dc61e9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 2
+  expirationAnimationDuration: 0.3
 --- !u!1001 &8667299266987396156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,6 +110,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f9533094b975d5947aaf5dcfe88b61ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9184664d8fade234697a7f0d6f8edf47, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f9533094b975d5947aaf5dcfe88b61ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 77c467951e0274b4f99f3c45ed2945d6, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f9533094b975d5947aaf5dcfe88b61ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5acd467f4d7aa4246bdea10ba9bf3dcf, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f9533094b975d5947aaf5dcfe88b61ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ebf7b2df521ad31449893e179fc186e5, type: 2}
     - target: {fileID: 919132149155446097, guid: f9533094b975d5947aaf5dcfe88b61ac, type: 3}
       propertyPath: m_Name
       value: trash

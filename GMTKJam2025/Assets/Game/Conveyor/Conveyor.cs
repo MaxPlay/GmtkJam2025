@@ -43,11 +43,12 @@ public abstract class Conveyor : MonoBehaviour
             currentItem.SetConveyor(this);
     }
 
-    public void Tick()
+    public bool Tick()
     {
         if (installedMachine)
         {
-            if (installedMachine.ModuleTick(currentItem, out ConveyorItem newItem))
+            bool machineWorkedSuccessfully = installedMachine.ModuleTick(currentItem, out ConveyorItem newItem);
+            if (machineWorkedSuccessfully)
             {
                 if (currentItem && (!newItem || newItem.Data != currentItem.Data))
                 {
@@ -63,16 +64,32 @@ public abstract class Conveyor : MonoBehaviour
             else
             {
                 //Machine Broke
+                if (newItem)
+                {
+                    Destroy(newItem.gameObject);
+                }
+
+                if (currentItem)
+                {
+                    Destroy(currentItem.gameObject);
+                    currentItem = null;
+                }
+                return false;
             }
         }
 
+        if (currentItem)
+        {
+            if (!currentItem.Tick())
+                currentItem = null;
+        }
         if (next)
         {
             next.PassItem(currentItem);
             currentItem = null;
         }
 
-
+        return true;
     }
 
     private void PassItem(ConveyorItem item)
@@ -140,6 +157,10 @@ public abstract class Conveyor : MonoBehaviour
             currentItem.SetConveyor(this);
             MoveIn(currentItem.transform, moveSequence);
         }
+    }
+    public void DropReceivingItem()
+    {
+        incomingItem = null;
     }
 
     protected abstract void MoveToOut(Transform item, Sequence moveSequence);

@@ -1,9 +1,9 @@
 using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,10 +13,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<Conveyor> conveyors = new();
     private readonly Dictionary<Vector2Int, Conveyor> conveyorAtCoordinate = new();
+    [SerializeField] private Material conveyorMaterial;
 
     [ReadOnly]
     [SerializeField]
     private List<Machine> machines = new();
+    private List<Machine> brokenMachines = new();
 
     [SerializeField]
     private float conveyorMoveDuration = 0.3f;
@@ -152,6 +154,10 @@ public class GameManager : MonoBehaviour
                 while (lastTick > tickDuration)
                 {
                     lastTick -= tickDuration;
+                    if (brokenMachines.Count > 0)
+                        break;
+                    conveyorMaterial.SetFloat("_TextureOffset", 0f);
+                    conveyorMaterial.DOFloat(1f, "_TextureOffset", conveyorMoveDuration).SetEase(Ease.InOutQuad);
                     foreach (Conveyor conveyor in conveyors)
                     {
                         conveyor.Tick();
@@ -263,5 +269,15 @@ public class GameManager : MonoBehaviour
         public int TargetCountStar2;
         [ReadOnly]
         public int CurrentCount;
+    }
+
+    public void MachineBroken(Machine machine)
+    {
+        brokenMachines.Add(machine);
+    }
+
+    public bool TryFixMachine(Machine machine)
+    {
+        return brokenMachines.Remove(machine);
     }
 }

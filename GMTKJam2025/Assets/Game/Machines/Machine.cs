@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 
 [DisallowMultipleComponent]
 public class Machine : MonoBehaviour
@@ -18,6 +19,9 @@ public class Machine : MonoBehaviour
     private Interactable interactable;
     private Conveyor currentConveyorPiece;
 
+    [SerializeField] private UnityEvent onBreak;
+    [SerializeField] private UnityEvent onRepair;
+    [SerializeField] private List<GameObject> blinkingLights;
 
     public void Initialize(GameManager gameManager)
     {
@@ -31,6 +35,9 @@ public class Machine : MonoBehaviour
 
         inactiveMachineModus = gameObject.AddComponent<InactiveMachineModus>();
         inactiveMachineModus.SetMachine(this);
+
+        inactiveMachineModus.ModusEntered.AddListener((() => EnableLights(true)));
+        inactiveMachineModus.ModusExited.AddListener((() => EnableLights(false)));
 
         inactiveMachineModus.ModusExited.Invoke();
         if (secondaryMachineModus != mainMachineModus)
@@ -56,8 +63,22 @@ public class Machine : MonoBehaviour
             DropOff(currentConveyorPiece);
     }
 
+    private void EnableLights(bool enable)
+    {
+        foreach (GameObject blinkingLight in blinkingLights)
+        {
+            blinkingLight.SetActive(enable);
+        }
+    }
+
     public void Interact(int interactionIndex)
     {
+        if (GameManager.TryFixMachine(this))
+        {
+            onRepair.Invoke();
+            return;
+        }
+
         MachineModus newModus = interactionIndex switch
         {
             0 => mainMachineModus,
@@ -85,7 +106,14 @@ public class Machine : MonoBehaviour
     {
         if (currentModus)
         {
-            return currentModus.Tick(currentItem, out newItem);
+            bool working = currentModus.Tick(currentItem, out newItem);
+            if (!working)
+            {
+                Interact(2);
+                GameManager.MachineBroken(this);
+                onBreak.Invoke();
+            }
+            return working;
         }
 
         newItem = null;
@@ -105,8 +133,9 @@ public class Machine : MonoBehaviour
     private void DropOff(Conveyor conveyor)
     {
         currentConveyorPiece = conveyor;
-        transform.position = conveyor.CenterPosition;
-        transform.LookAt(conveyor.OutPosition);
+        transform.position = conveyor.transform.position;
+        
+        transform.rotation = Quaternion.LookRotation(conveyor.OutPosition - conveyor.CenterPosition, Vector3.up);
         currentConveyorPiece.InstallMachine(this);
     }
 }

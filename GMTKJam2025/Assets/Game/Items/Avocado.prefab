@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 8efcd1e07369e274f94629a061fd9575, type: 2}
+  conveyor: {fileID: 0}
 --- !u!1001 &7156321087551937189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,6 +95,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b3a19e469f3771b418cdfad741bfaf19, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9df463759459c0042a096070637081b2, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b3a19e469f3771b418cdfad741bfaf19, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b57bde4c6a37d3544b987c0a899d5aae, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b3a19e469f3771b418cdfad741bfaf19, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ebf7b2df521ad31449893e179fc186e5, type: 2}
     - target: {fileID: 919132149155446097, guid: b3a19e469f3771b418cdfad741bfaf19, type: 3}
       propertyPath: m_Name
       value: avocado

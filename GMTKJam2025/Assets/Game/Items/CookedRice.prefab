@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 385c339077bb3734584f627b6ba9f475, type: 2}
+  conveyor: {fileID: 0}
 --- !u!1001 &3307971490641792098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95,6 +96,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2fc863d533a902e4c9c47a6e735a85ad, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5acd467f4d7aa4246bdea10ba9bf3dcf, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2fc863d533a902e4c9c47a6e735a85ad, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d374dd3a44432a84cb089494b28f349a, type: 2}
     - target: {fileID: 919132149155446097, guid: 2fc863d533a902e4c9c47a6e735a85ad, type: 3}
       propertyPath: m_Name
       value: cooked_rice
@@ -160,6 +169,10 @@ PrefabInstance:
     - target: {fileID: 7452121582511848073, guid: 0388c9a24c75db342bfc7d68922f6ad7, type: 3}
       propertyPath: m_Name
       value: VapeParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939940015302020509, guid: 0388c9a24c75db342bfc7d68922f6ad7, type: 3}
+      propertyPath: scalingMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

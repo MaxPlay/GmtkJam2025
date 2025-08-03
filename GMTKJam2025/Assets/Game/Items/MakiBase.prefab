@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: d11a2bd93e6e38042a553a018b04ea87, type: 2}
+  conveyor: {fileID: 0}
 --- !u!1001 &85146988694771296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,6 +95,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2d3ef886138450f46a5b085100e4f2ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fd9075d26a63fa141905fa18dd81de64, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2d3ef886138450f46a5b085100e4f2ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d374dd3a44432a84cb089494b28f349a, type: 2}
     - target: {fileID: 919132149155446097, guid: 2d3ef886138450f46a5b085100e4f2ac, type: 3}
       propertyPath: m_Name
       value: maki_base
