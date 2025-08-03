@@ -28,6 +28,7 @@ public class Machine : MonoBehaviour
 
         inactiveMachineModus = gameObject.AddComponent<InactiveMachineModus>();
 
+        inactiveMachineModus.ModusExited.Invoke();
         if (secondaryMachineModus != mainMachineModus)
             secondaryMachineModus.ModusExited.Invoke();
         mainMachineModus.ModusEntered.Invoke();
