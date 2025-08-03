@@ -45,10 +45,10 @@ public class CombineMachineModus : StorageMachineModus
                 if (pair.TryCombine(storedItem, currentItem, out ConveyorItemData result))
                 {
                     newItem = Instantiate(result.Prefab);
-                    return true;
                 }
             }
-            newItem = currentItem.Data == fallback ? currentItem : Instantiate(fallback.Prefab);
+            if(!newItem)
+                newItem = currentItem.Data == fallback ? currentItem : Instantiate(fallback.Prefab);
             Transform storedItemTransform = storedItem.transform;
             storedItem = null;
             storedItemTransform.SetParent(null);
