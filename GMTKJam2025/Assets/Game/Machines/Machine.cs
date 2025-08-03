@@ -27,6 +27,11 @@ public class Machine : MonoBehaviour
             secondaryMachineModus = mainMachineModus;
 
         inactiveMachineModus = gameObject.AddComponent<InactiveMachineModus>();
+
+        if (secondaryMachineModus != mainMachineModus)
+            secondaryMachineModus.ModusExited.Invoke();
+        mainMachineModus.ModusEntered.Invoke();
+
         carryable = GetComponent<Carryable>();
         if (carryable)
         {
@@ -48,12 +53,19 @@ public class Machine : MonoBehaviour
 
     public void Interact(int interactionIndex)
     {
-        currentModus = interactionIndex switch
+        MachineModus newModus = interactionIndex switch
         {
             0 => mainMachineModus,
             1 => secondaryMachineModus,
             2 => inactiveMachineModus
         };
+
+        if (newModus == currentModus)
+            return;
+
+        currentModus.ModusExited.Invoke();
+        currentModus = newModus;
+        currentModus.ModusEntered.Invoke();
     }
 
     public void SetBlocked(bool blocked)

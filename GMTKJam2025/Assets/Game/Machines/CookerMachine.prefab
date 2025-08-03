@@ -121,6 +121,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c7f68de9531b34dbe09728f3cdaa52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modusEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8199318108081511067}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  modusExited:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8199318108081511067}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   fallback: {fileID: 11400000, guid: ea31ad45a34c96844bbc07bde71db639, type: 2}
   transformations:
   - From: {fileID: 11400000, guid: 9ad10527f8515f1459e4843620b713c3, type: 2}
@@ -185,6 +215,11 @@ PrefabInstance:
 --- !u!4 &3275501856984558210 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642684863203425668, guid: 0388c9a24c75db342bfc7d68922f6ad7, type: 3}
+  m_PrefabInstance: {fileID: 2304014525493204742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8199318108081511067 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7939940015302020509, guid: 0388c9a24c75db342bfc7d68922f6ad7, type: 3}
   m_PrefabInstance: {fileID: 2304014525493204742}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4523465322219369066
