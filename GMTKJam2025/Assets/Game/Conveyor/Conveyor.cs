@@ -1,7 +1,9 @@
 ﻿using DG.Tweening;
 using NaughtyAttributes;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public abstract class Conveyor : MonoBehaviour
@@ -97,6 +99,7 @@ public abstract class Conveyor : MonoBehaviour
         incomingItem = item;
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Transform thisTransform = transform;
@@ -111,13 +114,14 @@ public abstract class Conveyor : MonoBehaviour
         };
         DrawArrow.ForGizmo(thisPosition + Vector3.up, directionVector);
 
-        Handles.Label(thisPosition + Vector3.up * 1.1f, GameManager.CoordinateFromWorld(thisPosition).ToString());
+        Handles.Label(thisPosition + Vector3.up * 1.1f, GameManager.CoordinateFromWorld(thisPosition).ToString()); //Editor Only
 
         Gizmos.color = Color.white;
         Gizmos.DrawCube(thisTransform.TransformPoint(centerPosition), Vector3.one * 0.2f);
         Gizmos.color = Color.red;
         Gizmos.DrawCube(thisTransform.TransformPoint(outPosition), Vector3.one * 0.2f);
     }
+#endif
 
     public void InstallMachine(Machine machine)
     {

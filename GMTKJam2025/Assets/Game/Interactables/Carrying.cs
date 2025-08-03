@@ -8,6 +8,8 @@ public class Carrying : MonoBehaviour
 {
     [SerializeField] private float pickUpRange;
     [ReadOnly] private Carryable currentlyCarriedObject;
+    [SerializeField]
+    private Animator animator;
 
     private void OnDrawGizmos()
     {
@@ -37,6 +39,9 @@ public class Carrying : MonoBehaviour
         closestCarryable.transform.position = transform.position;
         currentlyCarriedObject.GetPickedUp();
 
+        if (animator)
+            animator.SetBool("Carrying", true);
+
         return true;
     }
 
@@ -61,6 +66,9 @@ public class Carrying : MonoBehaviour
         currentlyCarriedObject.transform.position = closestConveyor.transform.position;
         currentlyCarriedObject.transform.SetParent(closestConveyor.transform);
         currentlyCarriedObject = null;
+
+        if (animator)
+            animator.SetBool("Carrying", false);
 
         return true;
     }
