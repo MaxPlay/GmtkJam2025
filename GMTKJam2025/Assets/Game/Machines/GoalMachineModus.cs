@@ -9,7 +9,7 @@ public class GoalMachineModus : MachineModus
     {
         newItem = null;
 
-        if (intendedItem == currentItem.Data)
+        if (currentItem && intendedItem == currentItem.Data)
         {
             //Score
         }

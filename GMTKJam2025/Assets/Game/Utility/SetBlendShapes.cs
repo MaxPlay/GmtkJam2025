@@ -25,10 +25,13 @@ public class SetBlendShapes : MonoBehaviour
     {
         float startTime = Time.time;
 
+        float startValue = meshRenderer.GetBlendShapeWeight(index);
+        float targetValue = inverted ? maxValue : 0;
+
         while (Time.time < startTime + blendTime)
         {
             float progress = (Time.time - startTime) / blendTime;
-            meshRenderer.SetBlendShapeWeight(index, inverted ? progress * maxValue : ((1 - progress) * maxValue));
+            meshRenderer.SetBlendShapeWeight(index, Mathf.Lerp(startValue, targetValue, progress));
             yield return null;
         }
         meshRenderer.SetBlendShapeWeight(index, inverted ?  maxValue : 0);
