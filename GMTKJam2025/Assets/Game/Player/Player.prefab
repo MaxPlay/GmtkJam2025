@@ -198,8 +198,6 @@ MonoBehaviour:
   states:
   - state: 0
     behaviour: {fileID: 6726921652835944541}
-  - state: 1
-    behaviour: {fileID: 0}
   - state: 2
     behaviour: {fileID: 2826093182787277084}
 --- !u!114 &6726921652835944541
@@ -285,9 +283,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   rotator: {fileID: 2528596560973428335}
-  rotationSpeed: 5
-  movementSpeed: 5
-  acceleartion: 20
+  rotationSpeed: 10
+  movementSpeed: 6
+  acceleartion: 30
 --- !u!54 &4938866372198835190
 Rigidbody:
   m_ObjectHideFlags: 0

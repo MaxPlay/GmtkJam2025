@@ -20,10 +20,10 @@ public class InputMovementBehaviour : MonoBehaviour
     public void UpdateMovement(float deltaTime)
     {
         Vector2 movementInput = moveAction.action.ReadValue<Vector2>();
-        velocity = Vector3.Lerp(velocity, new Vector3(movementInput.x, 0, movementInput.y) * movementSpeed, acceleartion * deltaTime);
+        velocity = Vector3.Lerp(velocity, new Vector3(movementInput.x, 0, movementInput.y) * movementSpeed, acceleartion * Time.deltaTime);
         if (movementInput != Vector2.zero)
-            rotator.rotation = Quaternion.Slerp(rotator.rotation, Quaternion.LookRotation(new Vector3(movementInput.x, 0, movementInput.y), Vector3.up), rotationSpeed * deltaTime);
-        rb.MovePosition(transform.position + velocity * deltaTime);
+            rotator.rotation = Quaternion.Slerp(rotator.rotation, Quaternion.LookRotation(new Vector3(movementInput.x, 0, movementInput.y), Vector3.up), rotationSpeed * Time.deltaTime);
+        rb.linearVelocity = velocity;
         //transform.Translate(new Vector3(velocity.x, 0, velocity.y) * deltaTime * movementSpeed);
     }
 }
