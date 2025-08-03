@@ -10,4 +10,8 @@ public class ConveyorItemData : ScriptableObject
     [SerializeField]
     private ConveyorItem prefab;
     public ConveyorItem Prefab => prefab;
+
+    [SerializeField]
+    private Sprite sprite;
+    public Sprite Sprite => sprite;
 }
