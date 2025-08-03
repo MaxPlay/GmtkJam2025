@@ -744,6 +744,7 @@ GameObject:
   - component: {fileID: 1722712916}
   - component: {fileID: 1722712915}
   - component: {fileID: 1722712914}
+  - component: {fileID: 1722712918}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -879,6 +880,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722712912}
   m_CullTransparentMesh: 1
+--- !u!114 &1722712918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722712912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14a57418596ecb43b3596acf71d8268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 8413057432696694040, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &1913571373
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +906,7 @@ GameObject:
   - component: {fileID: 1913571376}
   - component: {fileID: 1913571375}
   - component: {fileID: 1913571374}
+  - component: {fileID: 1913571379}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -996,6 +1011,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1913571379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913571373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 280354ed-b82e-46ef-a2f0-8c41791e4391
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

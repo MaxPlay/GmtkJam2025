@@ -38,16 +38,25 @@ public class PauseScreen : GameHudModule
 
     public void Continue()
     {
+        if (!enabled)
+            return;
+
         Owner.GameManager.Unpause();
     }
 
     public void Restart()
     {
+        if (!enabled)
+            return;
+
         SceneManager.LoadScene(Owner.GameManager.gameObject.scene.name);
     }
 
     public void BackToMenu()
     {
+        if (!enabled)
+            return;
+
         SceneManager.LoadScene(Scenes.MENU_SCENE);
     }
 }
