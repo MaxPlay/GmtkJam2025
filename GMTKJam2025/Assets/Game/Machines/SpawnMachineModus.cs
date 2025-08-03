@@ -16,12 +16,11 @@ public class SpawnMachineModus : MachineModus
 
     public override bool Tick(ConveyorItem currentItem, out ConveyorItem newItem)
     {
-        if(currentItem &&  breakingItems.Contains(currentItem.Data))
+        newItem = null;
+        if (currentItem &&  breakingItems.Contains(currentItem.Data))
         {
-            newItem = null;
             return false;
         }
-        newItem = null;
         ticksBetweenSpawnCounter++;
         if (ticksBetweenSpawnCounter > ticksBetweenSpawn)
         {

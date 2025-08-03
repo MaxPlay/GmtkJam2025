@@ -26,10 +26,14 @@ public class Machine : MonoBehaviour
     {
         GameManager = gameManager;
         currentModus = mainMachineModus;
+        mainMachineModus.SetMachine(this);
         if (!secondaryMachineModus)
             secondaryMachineModus = mainMachineModus;
+        else
+            secondaryMachineModus.SetMachine(this);
 
         inactiveMachineModus = gameObject.AddComponent<InactiveMachineModus>();
+        inactiveMachineModus.SetMachine(this);
 
         inactiveMachineModus.ModusExited.Invoke();
         if (secondaryMachineModus != mainMachineModus)
@@ -67,7 +71,7 @@ public class Machine : MonoBehaviour
         {
             0 => mainMachineModus,
             1 => secondaryMachineModus,
-            2 => inactiveMachineModus
+            _ => inactiveMachineModus
         };
 
         if (newModus == currentModus)
