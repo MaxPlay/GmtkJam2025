@@ -159,7 +159,7 @@ MonoBehaviour:
     TargetCountStar1: 4
     TargetCountStar2: 6
     CurrentCount: 0
-  totalDuration: 360
+  totalDuration: 600
   endless: 0
   state: 0
 --- !u!4 &48822824
@@ -2779,9 +2779,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1811239747817724496, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811239747817724496, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811239747817724496, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811239747817724496, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2494609691301649498, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
       propertyPath: m_Name
       value: GameHud
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825954474949213681, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5543730430952935861, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302321885408872369, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302321885408872369, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302321885408872369, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302321885408872369, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6412146800095098835, guid: 3fcf9f8ed67d8cc4cb73df40ca809eeb, type: 3}
       propertyPath: m_AnchorMax.y

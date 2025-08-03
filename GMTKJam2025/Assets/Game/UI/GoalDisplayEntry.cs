@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class GoalDisplayEntry : MonoBehaviour
@@ -28,7 +29,7 @@ public class GoalDisplayEntry : MonoBehaviour
         iconImage.sprite = condition.Item.Sprite;
         score = condition.CurrentCount;
         scoreText.text = score.ToString();
-        progress.anchorMax = new Vector2(GetPercentage(score, out int star), 0.5f);
+        progress.anchorMax = new Vector2(GetPercentage(score, out int star), 1f);
         star0.SetVisible(star > 0);
         star1.SetVisible(star > 1);
         star2.SetVisible(star > 2);
@@ -40,7 +41,8 @@ public class GoalDisplayEntry : MonoBehaviour
         {
             score = Condition.CurrentCount;
             scoreText.text = score.ToString();
-            progress.DOAnchorMax(new Vector2(GetPercentage(score, out int star), 0.5f), 0.25f);
+            float percentage = GetPercentage(score, out int star);
+            progress.DOAnchorMax(new Vector2(percentage, 1f), 0.25f);
             star0.SetVisible(star > 0);
             star1.SetVisible(star > 1);
             star2.SetVisible(star > 2);
@@ -49,15 +51,18 @@ public class GoalDisplayEntry : MonoBehaviour
 
     private float GetPercentage(int score, out int star)
     {
+        int threshold = 0;
         star = 0;
         if (Condition.TargetCountStar0 > score)
-            return (score / (float)Condition.TargetCountStar0) * 0.3f;
+            return ((score - threshold) / (float)(Condition.TargetCountStar0 - threshold)) * 0.3f;
         star = 1;
+        threshold = Condition.TargetCountStar0;
         if (Condition.TargetCountStar1 > score)
-            return (score / (float)Condition.TargetCountStar1) * 0.3f + 0.3f;
+            return ((Condition.TargetCountStar1 - threshold) == 0 ? 0 : ((score - threshold) / (float)(Condition.TargetCountStar1 - threshold)) * 0.3f) + 0.3f;
         star = 2;
+        threshold = Condition.TargetCountStar1;
         if (Condition.TargetCountStar2 > score)
-            return (score / (float)Condition.TargetCountStar2) * 0.3f + 0.6f;
+            return ((Condition.TargetCountStar2 - threshold) == 0 ? 0 : ((score - threshold) / (float)(Condition.TargetCountStar2 - threshold)) * 0.3f) + 0.6f;
         star = 3;
         return 1;
     }

@@ -78,6 +78,9 @@ public class GameManager : MonoBehaviour
                     case GameState.Paused:
                         Time.timeScale = 0;
                         break;
+                    case GameState.Over:
+                        InputSystem.actions.FindActionMap("Player").Disable();
+                        break;
                 }
             }
         }
@@ -101,6 +104,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InputSystem.actions.FindActionMap("UI").Enable();
+        InputSystem.actions.FindActionMap("Menu").Enable();
+
         pauseAction = InputSystem.actions.FindAction("Pause");
         pauseAction.started += PauseAction_started;
 
@@ -178,8 +184,6 @@ public class GameManager : MonoBehaviour
                 if (Timer <= 0)
                 {
                     State = GameState.Over;
-
-                    SceneManager.LoadScene(Scenes.MENU_SCENE);
                 }
                 break;
         }

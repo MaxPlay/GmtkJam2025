@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator Start()
     {
+        Time.timeScale = 1;
         if (elements.Count == 0)
         {
             GetComponentsInChildren(true, elements);

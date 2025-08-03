@@ -1,7 +1,9 @@
 ﻿using DG.Tweening;
-using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameHud : MonoBehaviour
 {
@@ -13,11 +15,19 @@ public class GameHud : MonoBehaviour
     [SerializeField]
     private GoalDisplay goalDisplay;
     [SerializeField]
-    TextMeshProUGUI timer;
+    private TextMeshProUGUI timer;
     [SerializeField]
-    TextMeshProUGUI start;
+    private TextMeshProUGUI start;
     [SerializeField]
-    TextMeshProUGUI finished;
+    private TextMeshProUGUI finished;
+    [SerializeField]
+    private GameObject finishObject;
+    [SerializeField]
+    private WinStar finishStar0;
+    [SerializeField]
+    private WinStar finishStar1;
+    [SerializeField]
+    private WinStar finishStar2;
 
     private void Start()
     {
@@ -28,7 +38,7 @@ public class GameHud : MonoBehaviour
 
     private void Update()
     {
-        int totalSeconds = Mathf.FloorToInt(GameManager.Timer);
+        int totalSeconds = Mathf.Max(Mathf.FloorToInt(GameManager.Timer), 0);
         timer.text = $"{totalSeconds / 60:00}:{totalSeconds % 60:00}";
 
         if (state != GameManager.State)
@@ -65,9 +75,43 @@ public class GameHud : MonoBehaviour
                 case GameManager.GameState.Running:
                     break;
                 case GameManager.GameState.Over:
+                    finishObject.SetActive(true);
+                    List<Button> buttons = new();
+                    finishObject.GetComponentsInChildren(buttons);
+                    foreach (Button button in buttons)
+                    {
+                        button.transform.localScale = Vector3.zero;
+                        button.transform.DOScale(Vector3.one, 0.3f);
+                    }
+
+                    Sequence s = DOTween.Sequence(finished.transform);
+                    s.Append(finished.transform.DOScale(Vector2.one * 1.2f, 1f));
+                    s.Append(finished.transform.DOScale(Vector2.one, 0.4f));
+                    s.OnComplete(() =>
+                    {
+                        foreach (Button button in buttons)
+                        {
+                            button.transform.DOScale(Vector3.one, 0.3f);
+                        }
+
+                        finishStar0.SetVisible(GameManager.Stars > 0);
+                        finishStar1.SetVisible(GameManager.Stars > 1);
+                        finishStar2.SetVisible(GameManager.Stars > 2);
+                    }).Play();
                     break;
             }
         }
+    }
+    public void Restart()
+    {
+        if (GameManager.State == GameManager.GameState.Over)
+            SceneManager.LoadScene(GameManager.gameObject.scene.name);
+    }
+
+    public void BackToMenu()
+    {
+        if (GameManager.State == GameManager.GameState.Over)
+            SceneManager.LoadScene(Scenes.MENU_SCENE);
     }
 }
 
