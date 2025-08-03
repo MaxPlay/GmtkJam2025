@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseScreen : GameHudModule
 {
-    private List<PauseScreenElement> elements = new();
+    private readonly List<PauseScreenElement> elements = new();
 
     protected override void Initialize()
     {

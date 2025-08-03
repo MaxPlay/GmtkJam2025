@@ -1288,6 +1288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conveyors: []
+  conveyorMaterial: {fileID: 2100000, guid: c8ce7e6b1e5f4214bae24bed6142c3f2, type: 2}
   machines: []
   conveyorMoveDuration: 0.3
   tickDuration: 1
