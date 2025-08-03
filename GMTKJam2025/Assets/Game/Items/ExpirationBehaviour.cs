@@ -10,9 +10,11 @@ public class ExpirationBehaviour : MonoBehaviour
     public bool Tick()
     {
         currentLife++;
+        float progress = (float)(currentLife) / (lifeTime + 1);
+        var scaleTween = transform.DOScale((1 - progress) * Vector3.one, expirationAnimationDuration).SetEase(Ease.Linear);
         if (currentLife > lifeTime)
         {
-            transform.DOScale(Vector3.zero, expirationAnimationDuration).SetEase(Ease.Linear).OnComplete(() => Destroy(gameObject));
+            scaleTween.OnComplete(() => Destroy(gameObject));
             return false;
         }
 
