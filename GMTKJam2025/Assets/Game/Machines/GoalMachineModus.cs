@@ -7,7 +7,7 @@ public class GoalMachineModus : MachineModus
     {
         newItem = null;
 
-        if (!Machine.GameManager.CollectItemForWinCondition(currentItem.Data))
+        if (currentItem && !Machine.GameManager.CollectItemForWinCondition(currentItem.Data))
         {
             return false;
         }
