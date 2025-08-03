@@ -96,6 +96,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2fc863d533a902e4c9c47a6e735a85ad, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5acd467f4d7aa4246bdea10ba9bf3dcf, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2fc863d533a902e4c9c47a6e735a85ad, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d374dd3a44432a84cb089494b28f349a, type: 2}
     - target: {fileID: 919132149155446097, guid: 2fc863d533a902e4c9c47a6e735a85ad, type: 3}
       propertyPath: m_Name
       value: cooked_rice

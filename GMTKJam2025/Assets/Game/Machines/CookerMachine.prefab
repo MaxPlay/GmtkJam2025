@@ -338,6 +338,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 10386090771145913}
     m_Modifications:
+    - target: {fileID: -8879391126077866720, guid: d05e8409ee9d86f4d9f281cd0297a8d8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7cc77aa1ea4644d8143224a9ddbb50, type: 2}
     - target: {fileID: -8679921383154817045, guid: d05e8409ee9d86f4d9f281cd0297a8d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -386,10 +390,30 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: e50c2cb7faa0b034aac9f4f6aa961a14, type: 2}
+    - target: {fileID: -810829715640059096, guid: d05e8409ee9d86f4d9f281cd0297a8d8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7cc77aa1ea4644d8143224a9ddbb50, type: 2}
     - target: {fileID: 919132149155446097, guid: d05e8409ee9d86f4d9f281cd0297a8d8, type: 3}
       propertyPath: m_Name
       value: machine_cooker
       objectReference: {fileID: 0}
+    - target: {fileID: 971517621020516019, guid: d05e8409ee9d86f4d9f281cd0297a8d8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7cc77aa1ea4644d8143224a9ddbb50, type: 2}
+    - target: {fileID: 1456651700207603273, guid: d05e8409ee9d86f4d9f281cd0297a8d8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7cc77aa1ea4644d8143224a9ddbb50, type: 2}
+    - target: {fileID: 2484592198415429173, guid: d05e8409ee9d86f4d9f281cd0297a8d8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7cc77aa1ea4644d8143224a9ddbb50, type: 2}
+    - target: {fileID: 3809630432800981676, guid: d05e8409ee9d86f4d9f281cd0297a8d8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7cc77aa1ea4644d8143224a9ddbb50, type: 2}
     - target: {fileID: 7537904287336039279, guid: d05e8409ee9d86f4d9f281cd0297a8d8, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
